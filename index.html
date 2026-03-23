@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Quest</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0d1a;--panel:#12162a;--panel2:#1a1f3a;--dim:rgba(255,255,255,.06);--glow:rgba(255,255,255,.12);--ai:#00e5ff;--data:#ff9100;--cloud:#b388ff;--gold:#ffd54f;--green:#4caf50;--blue:#42a5f5;--txt:#e8ecf1;--txt2:#8a94a8;--txt3:#5a6478}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--txt);line-height:1.75;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.015) 3px,rgba(0,0,0,.015) 6px);pointer-events:none;z-index:9999}
+.bg-glow{position:fixed;inset:0;z-index:0;overflow:hidden}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(80px);animation:drift 20s ease-in-out infinite alternate}
+.bg-orb.o1{width:400px;height:400px;background:rgba(0,229,255,.04);top:-10%;left:-5%}
+.bg-orb.o2{width:350px;height:350px;background:rgba(179,136,255,.04);bottom:-10%;right:-5%;animation-delay:-7s}
+.bg-orb.o3{width:300px;height:300px;background:rgba(255,145,0,.03);top:40%;left:50%;animation-delay:-14s}
+@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(40px,30px)}}
+.stars{position:fixed;inset:0;z-index:0}.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw linear infinite}
+@keyframes tw{0%,100%{opacity:.1}50%{opacity:.65}}
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 1.1rem}
+.hud{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,13,26,.93);backdrop-filter:blur(16px);border-bottom:2px solid rgba(255,213,79,.15);padding:.45rem 1.1rem;display:flex;align-items:center;justify-content:space-between}
+.hud-logo{font-weight:800;font-size:.82rem;color:var(--gold);display:flex;align-items:center;gap:.4rem}
+.hud-nav{display:flex;gap:.15rem}
+.hud-nav a{color:var(--txt3);text-decoration:none;font-size:.65rem;padding:.3rem .5rem;border-radius:6px;transition:.2s;font-weight:600;cursor:pointer}
+.hud-nav a:hover{color:var(--gold);background:rgba(255,213,79,.07)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:5rem 1rem 2rem;position:relative}
+.chibi-wrap{margin-bottom:1rem;animation:float 3s ease-in-out infinite;position:relative}
+.chibi-wrap .glow-ring{position:absolute;inset:-25px;background:radial-gradient(circle,rgba(255,213,79,.1),transparent 65%);border-radius:50%;animation:pulse-g 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulse-g{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.1)}}
+.hero-pre{font-family:'Press Start 2P',monospace;font-size:.48rem;color:var(--gold);letter-spacing:3px;margin-bottom:1.2rem;animation:blink 3s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-size:clamp(1.5rem,5vw,2.6rem);font-weight:900;line-height:1.35;margin-bottom:.8rem}
+.hero h1 .gl{background:linear-gradient(135deg,var(--ai),var(--cloud));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(0,229,255,.3))}
+.hero-sub{color:var(--txt2);font-size:.9rem;max-width:520px;margin-bottom:2rem;font-weight:400}
+.btn-g{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,#ffd54f,#ffab00);color:#1a1a2e;padding:.8rem 2rem;border-radius:12px;text-decoration:none;font-weight:800;font-size:.95rem;transition:.3s;box-shadow:0 4px 25px rgba(255,213,79,.3),inset 0 1px 0 rgba(255,255,255,.2);border:none;cursor:pointer;position:relative;overflow:hidden}
+.btn-g::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(transparent,rgba(255,255,255,.1),transparent);transform:rotate(45deg);animation:shine 3s ease-in-out infinite}
+@keyframes shine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
+.btn-g:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 35px rgba(255,213,79,.45)}
+.main-tabs{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center;padding:1.2rem 0;position:sticky;top:46px;z-index:50;background:rgba(10,13,26,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--dim)}
+.mt-btn{padding:.5rem .85rem;border:1px solid var(--dim);background:rgba(255,255,255,.02);color:var(--txt2);border-radius:9px;font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:.2s;font-family:inherit}
+.mt-btn:hover{border-color:rgba(255,213,79,.25);color:var(--txt)}
+.mt-btn.active{background:rgba(255,213,79,.08);border-color:rgba(255,213,79,.25);color:var(--gold)}
+.main-panel{display:none;padding:.8rem 0 2rem}.main-panel.active{display:block;animation:fadeUp .35s ease-out}
+@keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.st-badge{font-family:'Press Start 2P',monospace;font-size:.42rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem}
+.st-title{font-size:clamp(1.2rem,3.5vw,1.7rem);font-weight:800;margin-bottom:.5rem}
+.st-desc{color:var(--txt2);font-size:.88rem;max-width:640px;margin-bottom:1.5rem;line-height:1.8}
+.cmp-table{width:100%;border-collapse:separate;border-spacing:0;margin-bottom:1.5rem;font-size:.75rem;border-radius:14px;overflow:hidden;border:1px solid var(--dim)}
+.cmp-table th{background:rgba(255,213,79,.06);color:var(--gold);font-weight:700;padding:.55rem .4rem;text-align:center;font-size:.64rem;border-bottom:1px solid var(--dim)}
+.cmp-table th:first-child{text-align:left;padding-left:.8rem}
+.cmp-table td{padding:.55rem .4rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:middle;font-size:.73rem}
+.cmp-table td:first-child{text-align:left;font-weight:700;padding-left:.8rem;white-space:nowrap}
+.cmp-table tr:last-child td{border-bottom:none}
+.cmp-table tr:hover{background:rgba(255,255,255,.02)}
+.cmp-table .stars-r{color:var(--gold);letter-spacing:1px;font-size:.68rem}
+.cmp-table .fit-yes{color:var(--green);font-weight:800}.cmp-table .fit-no{color:#ff5252;font-weight:800}.cmp-table .fit-ok{color:var(--ai);font-weight:700}
+.cmp-highlight{background:rgba(179,136,255,.06)!important}
+/* RPG CONCEPT BOX */
+.rpg-concept{text-align:center;padding:1.8rem 1.2rem;border-radius:16px;border:1px solid rgba(255,213,79,.12);background:linear-gradient(135deg,rgba(255,213,79,.04),rgba(179,136,255,.03));margin-bottom:1.5rem}
+.rpg-chars{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem;align-items:flex-end}
+.rpg-char{text-align:center;padding:.5rem}
+.rpg-char .label{font-size:.58rem;font-weight:700;margin-top:.25rem;line-height:1.3}
+.rpg-char .sublabel{font-size:.5rem;color:var(--txt3);font-weight:400}
+.rpg-plus{display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:900;font-size:1.2rem;padding:0 .3rem}
+.rpg-concept h3{font-size:.92rem;color:var(--gold);margin-bottom:.4rem}
+.rpg-concept p{font-size:.8rem;color:var(--txt2);max-width:500px;margin:0 auto;line-height:1.8}
+/* ACCORDION */
+.acc{background:var(--panel);border:1px solid var(--dim);border-radius:16px;margin-bottom:.8rem;overflow:hidden;transition:.3s}
+.acc:hover{border-color:var(--glow)}
+.acc-header{padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem;cursor:pointer;user-select:none;transition:.2s}
+.acc-header:hover{background:rgba(255,255,255,.02)}
+.acc-chibi{flex-shrink:0}
+.acc-info{flex:1}
+.acc-name{font-size:1rem;font-weight:800}
+.acc-sub{font-size:.72rem;color:var(--txt2)}
+.acc-arrow{font-size:.75rem;color:var(--txt3);transition:.3s;flex-shrink:0}
+.acc.open .acc-arrow{transform:rotate(180deg);color:var(--gold)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease-out}
+.acc.open .acc-body{max-height:4000px}
+.acc-inner{padding:0 1.2rem 1.2rem}
+.acc.c-data .acc-name{color:var(--data)}.acc.c-data .vibe h4,.acc.c-data .cs a,.acc.c-data .how-box h4{color:var(--data)}.acc.c-data .cs-n{background:var(--data)}
+.acc.c-cloud .acc-name{color:var(--cloud)}.acc.c-cloud .vibe h4,.acc.c-cloud .cs a,.acc.c-cloud .how-box h4{color:var(--cloud)}.acc.c-cloud .cs-n{background:var(--cloud)}
+.acc.c-ai .acc-name{color:var(--ai)}.acc.c-ai .vibe h4,.acc.c-ai .cs a,.acc.c-ai .how-box h4{color:var(--ai)}.acc.c-ai .cs-n{background:var(--ai)}
+.acc.c-fs .acc-name{color:var(--green)}.acc.c-fs .vibe h4,.acc.c-fs .cs a,.acc.c-fs .how-box h4{color:var(--green)}.acc.c-fs .cs-n{background:var(--green)}
+.rpg-s{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
+.rpg-s-l{font-size:.67rem;font-weight:700;color:var(--txt2);min-width:110px;white-space:nowrap}
+.rpg-bar{flex:1;height:11px;background:rgba(255,255,255,.04);border-radius:6px;overflow:hidden;min-width:60px;border:1px solid rgba(255,255,255,.03)}
+.rpg-f{height:100%;border-radius:6px;transition:width .8s ease-out}
+.rpg-s-v{font-size:.6rem;font-weight:700;color:var(--txt3);min-width:70px;text-align:right}
+.f-sal{background:linear-gradient(90deg,#4caf50,#81c784)}.f-dem{background:linear-gradient(90deg,#42a5f5,#64b5f6)}.f-com{background:linear-gradient(90deg,#ffa726,#ffcc80)}.f-easy{background:linear-gradient(90deg,#26c6da,#80deea)}.f-fast{background:linear-gradient(90deg,#66bb6a,#a5d6a7)}.f-fit{background:linear-gradient(90deg,#ffd54f,#ffe082)}
+.vibe{background:rgba(255,255,255,.02);border:1px solid var(--dim);border-radius:11px;padding:1rem;margin:.7rem 0}
+.vibe h4{font-size:.78rem;font-weight:700;margin-bottom:.35rem;display:flex;align-items:center;gap:.3rem}
+.vibe p{font-size:.78rem;color:var(--txt2);line-height:1.8}
+.how-box{border-radius:11px;padding:1rem;margin:0 0 .7rem;border:1px solid}
+.how-box h4{font-size:.78rem;font-weight:700;margin-bottom:.3rem}
+.how-box p{font-size:.78rem;color:var(--txt2);line-height:1.8}
+.jd{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.6rem 0}
+.jd-item{background:rgba(255,255,255,.025);border:1px solid var(--dim);border-radius:8px;padding:.55rem}
+.jd-item .lbl{font-size:.56rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.15rem}
+.jd-item .val{font-size:.75rem;font-weight:700}
+.cs{display:flex;gap:.6rem;margin-bottom:.45rem;align-items:flex-start}
+.cs-n{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:800;flex-shrink:0;margin-top:2px;color:var(--bg)}
+.cs-t{font-size:.8rem;font-weight:700}
+.cs-m{font-size:.65rem;color:var(--txt3);display:flex;flex-wrap:wrap;gap:.3rem;margin:.1rem 0}
+.cs a{font-size:.7rem;font-weight:700;text-decoration:none}
+.cs a:hover{text-decoration:underline}
+.card{background:var(--panel);border:1px solid var(--dim);border-radius:14px;padding:1.2rem;margin-bottom:.7rem;transition:.3s}
+.card:hover{border-color:var(--glow);background:var(--panel2)}
+.card h3{font-size:.95rem;font-weight:800;margin-bottom:.3rem}
+.card p{font-size:.8rem;color:var(--txt2);line-height:1.8}
+.card ul{list-style:none;padding:0;margin:.35rem 0}
+.card ul li{font-size:.8rem;color:var(--txt2);line-height:1.8;padding-left:1.3rem;position:relative;margin-bottom:.15rem}
+.card ul li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-weight:700}
+.link-btn{display:inline-flex;align-items:center;gap:.3rem;padding:.4rem .8rem;border-radius:7px;font-size:.7rem;font-weight:700;text-decoration:none;transition:.2s;border:1px solid var(--dim);color:var(--txt);background:rgba(255,255,255,.025);margin:.2rem .2rem 0 0}
+.link-btn:hover{background:rgba(255,255,255,.07);border-color:var(--glow);transform:translateY(-1px)}
+.highlight-box{background:linear-gradient(135deg,rgba(0,229,255,.04),rgba(179,136,255,.04));border:1px solid rgba(0,229,255,.1);border-radius:13px;padding:1.1rem;margin:.7rem 0}
+.highlight-box h4{font-size:.82rem;font-weight:800;color:var(--ai);margin-bottom:.3rem}
+.highlight-box p{font-size:.78rem;color:var(--txt2);line-height:1.8}
+.intern-card{background:var(--panel);border:1px solid var(--dim);border-radius:13px;padding:1.1rem;margin-bottom:.6rem;transition:.3s}
+.intern-card:hover{border-color:rgba(0,229,255,.15);transform:translateY(-2px)}
+.intern-card h4{font-size:.88rem;font-weight:800;margin-bottom:.1rem}
+.intern-card .org{font-size:.68rem;color:var(--txt3);margin-bottom:.35rem}
+.intern-card p{font-size:.78rem;color:var(--txt2);margin-bottom:.45rem;line-height:1.7}
+.tip{display:flex;gap:.7rem;align-items:flex-start;background:var(--panel);border:1px solid var(--dim);border-radius:13px;padding:1rem;margin-bottom:.6rem;transition:.3s}
+.tip:hover{border-color:rgba(255,213,79,.12)}
+.tip-i{font-size:1.4rem;flex-shrink:0}
+.tip h4{font-size:.82rem;font-weight:700;color:var(--gold);margin-bottom:.2rem}
+.tip p{font-size:.78rem;color:var(--txt2);line-height:1.7}
+.moti{background:linear-gradient(135deg,rgba(255,213,79,.05),rgba(255,171,0,.02));border:1px solid rgba(255,213,79,.1);border-radius:15px;padding:1.6rem;text-align:center;margin:1.2rem 0}
+.moti .big{font-size:2rem;margin-bottom:.4rem}
+.moti h3{font-size:.95rem;font-weight:800;color:var(--gold);margin-bottom:.4rem}
+.moti p{color:var(--txt2);font-size:.82rem;max-width:550px;margin:0 auto;line-height:1.8}
+.cta-final{text-align:center;padding:1.5rem 0}
+.cta-final p{color:var(--txt2);font-size:.82rem;margin-bottom:.8rem}
+.footer{text-align:center;padding:2rem 1rem;border-top:1px solid var(--dim);margin-top:1rem}
+.footer .px{font-family:'Press Start 2P',monospace;font-size:.4rem;color:var(--gold);margin-bottom:.3rem;letter-spacing:1px}
+.footer p{font-size:.65rem;color:var(--txt3)}
+@media(max-width:640px){.hud-nav{display:none}.jd{grid-template-columns:1fr}.rpg-s-l{min-width:auto;width:100%;font-size:.63rem}.rpg-bar{width:100%}.main-tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;padding:.7rem .4rem}.cmp-table{font-size:.62rem}.cmp-table th,.cmp-table td{padding:.35rem .25rem}.rpg-chars{gap:.3rem}}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease-out,transform .5s ease-out}.rv.vis{opacity:1;transform:translateY(0)}
+
+/* Chibi shared base */
+.chibi-svg{filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+</style>
+</head>
+<body>
+<div class="bg-glow"><div class="bg-orb o1"></div><div class="bg-orb o2"></div><div class="bg-orb o3"></div></div>
+<div class="stars" id="sf"></div>
+
+<nav class="hud">
+<div class="hud-logo"><span style="font-size:.9rem">🤖</span> CAREER QUEST</div>
+<div class="hud-nav">
+<a onclick="showPanel('paths')">สายอาชีพ</a>
+<a onclick="showPanel('intern')">ฝึกงาน</a>
+<a onclick="showPanel('profile')">Resume</a>
+<a onclick="showPanel('comm')">สื่อสาร</a>
+<a onclick="showPanel('tips')">เคล็ดลับ</a>
+</div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===== HERO with Epic Chibi Knight ===== -->
+<section class="hero">
+<div class="chibi-wrap" style="width:180px;height:200px">
+<div class="glow-ring" style="inset:-30px;background:radial-gradient(circle,rgba(255,213,79,.15),rgba(0,229,255,.08) 40%,transparent 65%)"></div>
+<!-- HERO CHIBI: Epic armored warrior -->
+<svg class="chibi-svg" viewBox="-10 -20 180 210" width="180" xmlns="http://www.w3.org/2000/svg">
+<!-- Ground glow -->
+<ellipse cx="80" cy="172" rx="60" ry="8" fill="#ffd54f" opacity=".1"><animate attributeName="rx" values="55;65;55" dur="3s" repeatCount="indefinite"/></ellipse>
+<!-- Energy particles -->
+<circle cx="30" cy="60" r="2" fill="#00e5ff" opacity=".4"><animate attributeName="cy" values="65;50;65" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".1;.6;.1" dur="4s" repeatCount="indefinite"/></circle>
+<circle cx="140" cy="80" r="1.5" fill="#b388ff" opacity=".3"><animate attributeName="cy" values="85;70;85" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".1;.5;.1" dur="3s" repeatCount="indefinite"/></circle>
+<circle cx="20" cy="110" r="1.5" fill="#ffd54f" opacity=".3"><animate attributeName="cy" values="115;100;115" dur="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".1;.5;.1" dur="3.5s" repeatCount="indefinite"/></circle>
+<circle cx="145" cy="40" r="2" fill="#ffd54f" opacity=".3"><animate attributeName="cy" values="45;30;45" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".1;.6;.1" dur="5s" repeatCount="indefinite"/></circle>
+
+<!-- Cape (epic flowing) -->
+<path d="M42 72 Q35 110 20 170 L70 165 Q55 120 50 80Z" fill="#c62828" opacity=".85"/>
+<path d="M118 72 Q125 110 140 170 L90 165 Q105 120 110 80Z" fill="#c62828" opacity=".85"/>
+<path d="M48 78 Q42 112 28 165 L40 163 Q48 110 50 80Z" fill="#e53935" opacity=".35"/>
+<path d="M112 78 Q118 112 132 165 L120 163 Q112 110 110 80Z" fill="#e53935" opacity=".35"/>
+<!-- Cape inner glow -->
+<path d="M55 85 Q50 115 35 160" stroke="#ff8a80" stroke-width="1" fill="none" opacity=".2"/>
+<path d="M105 85 Q110 115 125 160" stroke="#ff8a80" stroke-width="1" fill="none" opacity=".2"/>
+
+<!-- Body armor (detailed) -->
+<rect x="46" y="70" width="68" height="44" rx="8" fill="#546e7a"/>
+<rect x="50" y="74" width="60" height="36" rx="6" fill="#607d8b"/>
+<!-- Chest plate detail -->
+<path d="M65 76 L80 86 L95 76 L95 96 L80 106 L65 96Z" fill="#78909c" opacity=".5"/>
+<circle cx="80" cy="86" r="5" fill="var(--gold)" opacity=".5"><animate attributeName="opacity" values=".3;.7;.3" dur="3s" repeatCount="indefinite"/></circle>
+<path d="M80 82 L83 86 L80 90 L77 86Z" fill="var(--gold)" opacity=".7"/>
+<!-- Armor trim lines -->
+<path d="M54 78 L65 78" stroke="var(--gold)" stroke-width="1" opacity=".4"/>
+<path d="M95 78 L106 78" stroke="var(--gold)" stroke-width="1" opacity=".4"/>
+<rect x="68" y="98" width="24" height="3" rx="1.5" fill="var(--gold)" opacity=".3"/>
+
+<!-- Shoulder pads (bigger) -->
+<ellipse cx="42" cy="76" rx="15" ry="10" fill="#455a64"/>
+<ellipse cx="42" cy="76" rx="12" ry="7" fill="#546e7a"/>
+<circle cx="42" cy="76" r="4" fill="var(--gold)" opacity=".5"/>
+<ellipse cx="118" cy="76" rx="15" ry="10" fill="#455a64"/>
+<ellipse cx="118" cy="76" rx="12" ry="7" fill="#546e7a"/>
+<circle cx="118" cy="76" r="4" fill="var(--gold)" opacity=".5"/>
+
+<!-- Belt -->
+<rect x="48" y="108" width="64" height="6" rx="3" fill="#455a64"/>
+<rect x="48" y="108" width="64" height="6" rx="3" fill="var(--gold)" opacity=".15"/>
+<circle cx="80" cy="111" r="4" fill="var(--gold)" opacity=".5"/>
+
+<!-- Legs -->
+<rect x="53" y="114" width="20" height="30" rx="7" fill="#455a64"/>
+<rect x="87" y="114" width="20" height="30" rx="7" fill="#455a64"/>
+<!-- Knee guards -->
+<ellipse cx="63" cy="128" rx="7" ry="5" fill="#546e7a"/>
+<ellipse cx="97" cy="128" rx="7" ry="5" fill="#546e7a"/>
+<circle cx="63" cy="128" r="2" fill="var(--gold)" opacity=".4"/>
+<circle cx="97" cy="128" r="2" fill="var(--gold)" opacity=".4"/>
+<!-- Boots -->
+<rect x="50" y="140" width="26" height="14" rx="6" fill="#37474f"/>
+<rect x="84" y="140" width="26" height="14" rx="6" fill="#37474f"/>
+<rect x="50" y="148" width="26" height="6" rx="3" fill="#263238"/>
+<rect x="84" y="148" width="26" height="6" rx="3" fill="#263238"/>
+
+<!-- Arms -->
+<path d="M46 78 Q26 92 18 112" stroke="#607d8b" stroke-width="14" fill="none" stroke-linecap="round"/>
+<path d="M114 78 Q134 88 142 105" stroke="#607d8b" stroke-width="14" fill="none" stroke-linecap="round"/>
+<!-- Gauntlets -->
+<circle cx="18" cy="114" r="8" fill="#455a64"/>
+<circle cx="142" cy="107" r="8" fill="#455a64"/>
+
+<!-- SWORD (right hand) - epic glowing AI sword -->
+<rect x="136" y="28" width="6" height="75" rx="2" fill="url(#heroSword)"/>
+<rect x="136" y="28" width="6" height="15" rx="2" fill="#fff" opacity=".3"/>
+<!-- Sword energy glow -->
+<rect x="134" y="30" width="10" height="70" rx="4" fill="#00e5ff" opacity=".08"><animate attributeName="opacity" values=".03;.12;.03" dur="2s" repeatCount="indefinite"/></rect>
+<rect x="130" y="98" width="18" height="6" rx="3" fill="var(--gold)"/>
+<rect x="130" y="98" width="18" height="6" rx="3" fill="#fff" opacity=".2"/>
+<rect x="134" y="104" width="10" height="14" rx="3" fill="#6d4c41"/>
+<circle cx="139" cy="60" r="3" fill="#fff" opacity=".4"><animate attributeName="opacity" values=".15;.6;.15" dur="2s" repeatCount="indefinite"/></circle>
+<circle cx="139" cy="45" r="2" fill="#00e5ff" opacity=".5"><animate attributeName="r" values="1.5;3;1.5" dur="2.5s" repeatCount="indefinite"/></circle>
+
+<!-- SHIELD (left hand) - more detailed -->
+<ellipse cx="15" cy="104" rx="20" ry="25" fill="#37474f"/>
+<ellipse cx="15" cy="104" rx="16" ry="20" fill="#455a64"/>
+<ellipse cx="15" cy="104" rx="12" ry="15" fill="#546e7a" opacity=".5"/>
+<circle cx="15" cy="101" r="7" fill="var(--gold)" opacity=".5"/>
+<path d="M8 101L15 90L22 101L15 112Z" fill="var(--gold)" opacity=".35"/>
+<circle cx="15" cy="101" r="3" fill="var(--gold)" opacity=".3"><animate attributeName="r" values="2.5;4;2.5" dur="3s" repeatCount="indefinite"/></circle>
+
+<!-- HEAD (big chibi head) -->
+<circle cx="80" cy="40" r="34" fill="#f5d0a9"/>
+
+<!-- Helmet (epic) -->
+<path d="M46 36 Q46 4 80 0 Q114 4 114 36" fill="#546e7a"/>
+<path d="M46 36 Q46 8 80 3 Q114 8 114 36" fill="#607d8b"/>
+<!-- Helmet visor -->
+<rect x="48" y="34" width="64" height="4" rx="2" fill="#455a64"/>
+<!-- Helmet crest (bigger, more epic) -->
+<path d="M73 2 Q80 -18 87 2" fill="#c62828"/>
+<rect x="77" y="-15" width="6" height="22" rx="3" fill="#c62828"/>
+<circle cx="80" cy="-15" r="4" fill="#ffd54f" opacity=".6"><animate attributeName="opacity" values=".3;.8;.3" dur="2s" repeatCount="indefinite"/></circle>
+<!-- Helmet wings -->
+<path d="M46 28 Q35 20 30 10" stroke="var(--gold)" stroke-width="2.5" fill="none" opacity=".6"/>
+<path d="M114 28 Q125 20 130 10" stroke="var(--gold)" stroke-width="2.5" fill="none" opacity=".6"/>
+<!-- Helmet gold trim -->
+<path d="M50 36 Q80 42 110 36" stroke="var(--gold)" stroke-width="2.5" fill="none" opacity=".5"/>
+
+<!-- Eyes (visible through helmet) -->
+<ellipse cx="67" cy="43" rx="5.5" ry="6" fill="#fff"/>
+<ellipse cx="93" cy="43" rx="5.5" ry="6" fill="#fff"/>
+<ellipse cx="68" cy="43" rx="4" ry="4.5" fill="#1a1a2e"/>
+<ellipse cx="94" cy="43" rx="4" ry="4.5" fill="#1a1a2e"/>
+<!-- Eye shine -->
+<circle cx="70" cy="42" r="2" fill="#fff"/>
+<circle cx="96" cy="42" r="2" fill="#fff"/>
+<circle cx="67" cy="45" r="1" fill="#fff" opacity=".5"/>
+<circle cx="93" cy="45" r="1" fill="#fff" opacity=".5"/>
+<!-- Blush -->
+<ellipse cx="58" cy="50" rx="5.5" ry="3" fill="#ffb3b3" opacity=".2"/>
+<ellipse cx="102" cy="50" rx="5.5" ry="3" fill="#ffb3b3" opacity=".2"/>
+<!-- Smile -->
+<path d="M73 55 Q80 60 87 55" stroke="#c4956a" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+<defs>
+<linearGradient id="heroSword" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00e5ff"/><stop offset="40%" stop-color="#b388ff"/><stop offset="100%" stop-color="#00e5ff"/></linearGradient>
+</defs>
+</svg>
+</div>
+<div class="hero-pre">— PRESS START —</div>
+<h1>สำรวจสายอาชีพ<br><span class="gl">หาจุดที่ใช่ของตัวเอง</span><br>ค่อยๆ เติบโตไปด้วยกัน</h1>
+<p class="hero-sub">ไม่ต้องรีบ ไม่ต้องเก่งตั้งแต่วันแรก แค่ลองเปิดดู<br>แล้วเลือกสิ่งที่รู้สึกว่า "อันนี้น่าสนุกดี" — แค่นั้นก็เริ่มได้แล้ว</p>
+<button onclick="showPanel('paths')" class="btn-g">🗺️ ลองสำรวจดู</button>
+</section>
+
+<!-- TABS -->
+<div class="main-tabs" id="mainTabs">
+<button class="mt-btn active" onclick="showPanel('paths')">🤖 สายอาชีพ</button>
+<button class="mt-btn" onclick="showPanel('intern')">🏢 ฝึกงาน</button>
+<button class="mt-btn" onclick="showPanel('profile')">📄 Resume</button>
+<button class="mt-btn" onclick="showPanel('comm')">🎤 สื่อสาร</button>
+<button class="mt-btn" onclick="showPanel('tips')">💡 เคล็ดลับ</button>
+</div>
+
+<!-- ====== PANEL: PATHS ====== -->
+<div class="main-panel active" id="p-paths">
+<div class="st-badge">🗺️ EXPLORE YOUR PATH</div>
+<div class="st-title">สำรวจ 3 สายอาชีพ</div>
+<p class="st-desc">ไม่ต้องเลือกตอนนี้ก็ได้ แค่ดูว่าแต่ละสายทำอะไร แล้วลองถามตัวเองว่า "อันไหนดูน่าลองดี?"</p>
+
+<!-- COMPARISON TABLE -->
+<table class="cmp-table rv">
+<thead><tr><th>สาย</th><th>เรียนง่าย</th><th>เงินเดือนเริ่ม</th><th>ได้งานเร็ว</th><th>คุยกับคน</th><th>เวลาเรียน</th><th>เหมาะกับเรา?</th></tr></thead>
+<tbody>
+<tr><td>📊 Data</td><td class="stars-r">★★★★★</td><td>22-40K</td><td class="stars-r">★★★</td><td>เยอะ</td><td>1-2 เดือน</td><td class="fit-yes">✅ เริ่มต้นดี</td></tr>
+<tr class="cmp-highlight"><td>☁️ Cloud</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★★★★</td><td>น้อย</td><td>2-3 เดือน</td><td class="fit-yes">✅✅ เหมาะมาก</td></tr>
+<tr><td>🤖 AI</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★</td><td>ปานกลาง</td><td>2-3 เดือน</td><td class="fit-ok">✅ ต่อยอดดี</td></tr>
+<tr><td>🌐 Full Stack</td><td class="stars-r">★★★</td><td>38-68K</td><td class="stars-r">★★★★</td><td>ปานกลาง</td><td>3-4 เดือน</td><td class="fit-ok">✅ เห็นผลเร็ว</td></tr>
+</tbody>
+</table>
+
+<!-- RPG CONCEPT with 3 Chibis + Ultimate Skill -->
+<div class="rpg-concept rv">
+<div class="rpg-chars">
+
+<!-- KNIGHT (Data) -->
+<div class="rpg-char">
+<svg class="chibi-svg" viewBox="0 0 80 95" width="65" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="26" r="20" fill="#f5d0a9"/>
+<path d="M20 22Q23 8 40 6Q57 8 60 22Q58 15 50 11Q40 6 30 11Q22 15 20 22Z" fill="#8B4513"/>
+<ellipse cx="33" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><ellipse cx="47" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/>
+<circle cx="34.2" cy="25" r="1.2" fill="#fff"/><circle cx="48.2" cy="25" r="1.2" fill="#fff"/>
+<path d="M36 33Q40 36 44 33" stroke="#c4956a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+<ellipse cx="27" cy="30" rx="3.5" ry="2" fill="#ffb3b3" opacity=".3"/><ellipse cx="53" cy="30" rx="3.5" ry="2" fill="#ffb3b3" opacity=".3"/>
+<rect x="27" y="46" width="26" height="22" rx="5" fill="#ff9100"/>
+<rect x="30" y="48" width="20" height="6" rx="2" fill="#ffb74d" opacity=".5"/>
+<circle cx="40" cy="51" r="2" fill="var(--gold)" opacity=".6"/>
+<ellipse cx="24" cy="50" rx="6" ry="5" fill="#e65100"/>
+<ellipse cx="56" cy="50" rx="6" ry="5" fill="#e65100"/>
+<rect x="30" y="68" width="9" height="14" rx="4" fill="#bf360c"/>
+<rect x="41" y="68" width="9" height="14" rx="4" fill="#bf360c"/>
+<rect x="28" y="78" width="13" height="7" rx="3" fill="#8d6e63"/>
+<rect x="39" y="78" width="13" height="7" rx="3" fill="#8d6e63"/>
+<!-- Shield -->
+<ellipse cx="14" cy="58" rx="10" ry="13" fill="#455a64"/><ellipse cx="14" cy="58" rx="7" ry="10" fill="#546e7a"/><circle cx="14" cy="56" r="3" fill="var(--gold)" opacity=".5"/>
+<!-- Sword -->
+<rect x="60" y="30" width="3.5" height="38" rx="1.5" fill="#90a4ae"/><rect x="55" y="66" width="14" height="4" rx="2" fill="var(--gold)"/><rect x="59" y="70" width="6" height="9" rx="2" fill="#6d4c41"/>
+</svg>
+<div class="label" style="color:var(--data)">📊 Knight<br><span class="sublabel">สาย Data</span></div>
+</div>
+
+<!-- MAGE (Cloud/DevOps) -->
+<div class="rpg-char">
+<svg class="chibi-svg" viewBox="0 -15 80 110" width="65" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="26" r="20" fill="#f5d0a9"/>
+<path d="M20 22Q23 8 40 6Q57 8 60 22Q58 15 50 11Q40 6 30 11Q22 15 20 22Z" fill="#2d2d2d"/>
+<ellipse cx="33" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><ellipse cx="47" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/>
+<circle cx="34.2" cy="25" r="1.2" fill="#fff"/><circle cx="48.2" cy="25" r="1.2" fill="#fff"/>
+<path d="M36 33Q40 36 44 33" stroke="#c4956a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+<ellipse cx="27" cy="30" rx="3.5" ry="2" fill="#ffb3b3" opacity=".3"/><ellipse cx="53" cy="30" rx="3.5" ry="2" fill="#ffb3b3" opacity=".3"/>
+<!-- Wizard hat -->
+<path d="M22 14 L40 -12 L58 14Z" fill="#5e35b1"/><path d="M22 14 L40 -12 L58 14Z" fill="#7c4dff" opacity=".3"/>
+<circle cx="40" cy="-4" r="4" fill="var(--gold)"><animate attributeName="opacity" values=".4;1;.4" dur="2s" repeatCount="indefinite"/></circle>
+<path d="M18 14 Q40 20 62 14" fill="#4527a0"/>
+<!-- Robe -->
+<path d="M25 46 Q20 70 15 88 L65 88 Q60 70 55 46Z" fill="#7c4dff"/>
+<rect x="30" y="48" width="20" height="6" rx="2" fill="#9575cd" opacity=".4"/>
+<rect x="28" y="78" width="12" height="8" rx="3" fill="#4527a0"/>
+<rect x="40" y="78" width="12" height="8" rx="3" fill="#4527a0"/>
+<!-- Staff -->
+<rect x="64" y="15" width="3" height="55" rx="1.5" fill="#8d6e63"/>
+<circle cx="65.5" cy="13" r="7" fill="#b388ff" opacity=".5"/><circle cx="65.5" cy="13" r="4.5" fill="#e1bee7" opacity=".7"/>
+<circle cx="65.5" cy="13" r="2.5" fill="#fff" opacity=".5"><animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/></circle>
+</svg>
+<div class="label" style="color:var(--cloud)">☁️ Mage<br><span class="sublabel">สาย Cloud/DevOps</span></div>
+</div>
+
+<!-- ASSASSIN (AI) -->
+<div class="rpg-char">
+<svg class="chibi-svg" viewBox="0 0 80 95" width="65" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="26" r="20" fill="#f5d0a9"/>
+<path d="M20 22Q23 8 40 6Q57 8 60 22Q58 15 50 11Q40 6 30 11Q22 15 20 22Z" fill="#1a1a2e"/>
+<ellipse cx="33" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><ellipse cx="47" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/>
+<circle cx="34.2" cy="25" r="1.2" fill="#00e5ff"/><circle cx="48.2" cy="25" r="1.2" fill="#00e5ff"/>
+<path d="M36 33Q40 36 44 33" stroke="#c4956a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+<!-- Mask/scarf -->
+<path d="M25 32 Q40 38 55 32 L55 40 Q40 34 25 40Z" fill="#263238" opacity=".7"/>
+<!-- Hood -->
+<path d="M20 20 Q22 5 40 2 Q58 5 60 20 Q55 10 40 8 Q25 10 20 20Z" fill="#263238"/>
+<path d="M18 22 L20 20 Q40 25 60 20 L62 22 Q40 28 18 22Z" fill="#37474f"/>
+<!-- Body - dark outfit -->
+<rect x="27" y="46" width="26" height="22" rx="5" fill="#263238"/>
+<path d="M35 48 L40 55 L45 48" stroke="#00e5ff" stroke-width="1" fill="none" opacity=".5"/>
+<rect x="30" y="68" width="9" height="14" rx="4" fill="#1a1a2e"/>
+<rect x="41" y="68" width="9" height="14" rx="4" fill="#1a1a2e"/>
+<rect x="28" y="78" width="13" height="7" rx="3" fill="#263238"/>
+<rect x="39" y="78" width="13" height="7" rx="3" fill="#263238"/>
+<!-- Dual daggers -->
+<rect x="10" y="42" width="2.5" height="25" rx="1" fill="url(#dagger1)"/><polygon points="11.25,40 8,44 14.5,44" fill="#00e5ff"/>
+<rect x="64" y="42" width="2.5" height="25" rx="1" fill="url(#dagger2)"/><polygon points="65.25,40 62,44 68.5,44" fill="#b388ff"/>
+<!-- Small robot companion -->
+<rect x="60" y="74" width="14" height="12" rx="4" fill="#37474f"/>
+<circle cx="64" cy="79" r="2" fill="#00e5ff"><animate attributeName="opacity" values=".5;1;.5" dur="1.5s" repeatCount="indefinite"/></circle>
+<circle cx="70" cy="79" r="2" fill="#00e5ff"><animate attributeName="opacity" values=".5;1;.5" dur="1.5s" repeatCount="indefinite" begin=".5s"/></circle>
+<rect x="63" y="83" width="2" height="4" rx="1" fill="#546e7a"/>
+<rect x="69" y="83" width="2" height="4" rx="1" fill="#546e7a"/>
+<defs>
+<linearGradient id="dagger1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#006978"/></linearGradient>
+<linearGradient id="dagger2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b388ff"/><stop offset="100%" stop-color="#4a148c"/></linearGradient>
+</defs>
+</svg>
+<div class="label" style="color:var(--ai)">🤖 Assassin<br><span class="sublabel">สาย AI</span></div>
+</div>
+
+<!-- RANGER (Full Stack) -->
+<div class="rpg-char">
+<svg class="chibi-svg" viewBox="0 0 80 95" width="65" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="26" r="20" fill="#f5d0a9"/>
+<path d="M20 22Q23 8 40 6Q57 8 60 22Q58 15 50 11Q40 6 30 11Q22 15 20 22Z" fill="#5d4037"/>
+<ellipse cx="33" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><ellipse cx="47" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/>
+<circle cx="34.2" cy="25" r="1.2" fill="#fff"/><circle cx="48.2" cy="25" r="1.2" fill="#fff"/>
+<path d="M36 33Q40 36 44 33" stroke="#c4956a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+<ellipse cx="27" cy="30" rx="3.5" ry="2" fill="#ffb3b3" opacity=".3"/><ellipse cx="53" cy="30" rx="3.5" ry="2" fill="#ffb3b3" opacity=".3"/>
+<!-- Hood/cape -->
+<path d="M20 18 Q22 6 40 3 Q58 6 60 18 Q55 12 40 9 Q25 12 20 18Z" fill="#2e7d32"/>
+<path d="M22 20 Q15 50 10 85 L28 82 Q25 50 27 30Z" fill="#388e3c" opacity=".7"/>
+<path d="M58 20 Q65 50 70 85 L52 82 Q55 50 53 30Z" fill="#388e3c" opacity=".7"/>
+<!-- Tunic -->
+<rect x="27" y="46" width="26" height="22" rx="5" fill="#43a047"/>
+<rect x="30" y="48" width="20" height="5" rx="2" fill="#66bb6a" opacity=".4"/>
+<path d="M37 50 L40 56 L43 50" stroke="var(--gold)" stroke-width="1" fill="none" opacity=".5"/>
+<!-- Belt -->
+<rect x="27" y="62" width="26" height="4" rx="2" fill="#5d4037"/>
+<circle cx="40" cy="64" r="2" fill="var(--gold)" opacity=".6"/>
+<!-- Legs -->
+<rect x="30" y="68" width="9" height="14" rx="4" fill="#33691e"/>
+<rect x="41" y="68" width="9" height="14" rx="4" fill="#33691e"/>
+<!-- Boots -->
+<rect x="28" y="78" width="13" height="7" rx="3" fill="#4e342e"/>
+<rect x="39" y="78" width="13" height="7" rx="3" fill="#4e342e"/>
+<!-- Bow -->
+<path d="M62 20 Q72 45 62 70" stroke="#8d6e63" stroke-width="2.5" fill="none"/>
+<line x1="62" y1="20" x2="62" y2="70" stroke="#bcaaa4" stroke-width="1"/>
+<!-- Quiver on back -->
+<rect x="8" y="35" width="8" height="25" rx="3" fill="#5d4037"/>
+<rect x="10" y="30" width="2" height="8" rx="1" fill="#ffd54f"/>
+<rect x="13" y="32" width="2" height="6" rx="1" fill="#ffd54f"/>
+</svg>
+<div class="label" style="color:var(--green)">🌐 Ranger<br><span class="sublabel">สาย Full Stack</span></div>
+</div>
+
+<!-- ULTIMATE SKILL -->
+<div class="rpg-char" style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end">
+<div style="font-size:.5rem;color:var(--gold);font-weight:700;margin-bottom:.4rem;text-align:center">ULTIMATE<br>SKILL</div>
+<svg viewBox="0 0 50 65" width="40" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="uSword" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00e5ff"/><stop offset="50%" stop-color="#fff"/><stop offset="100%" stop-color="#b388ff"/></linearGradient></defs>
+<rect x="22" y="2" width="6" height="35" rx="2" fill="url(#uSword)"/>
+<rect x="22" y="2" width="6" height="8" rx="2" fill="#fff" opacity=".4"/>
+<rect x="14" y="37" width="22" height="5" rx="2.5" fill="var(--gold)"/>
+<rect x="20" y="42" width="10" height="13" rx="3" fill="#6d4c41"/>
+<rect x="22" y="55" width="6" height="4" rx="2" fill="var(--gold)"/>
+<circle cx="25" cy="19" r="3" fill="#fff" opacity=".3"><animate attributeName="opacity" values=".1;.6;.1" dur="2s" repeatCount="indefinite"/></circle>
+<circle cx="25" cy="12" r="2" fill="#00e5ff" opacity=".5"><animate attributeName="r" values="1.5;3;1.5" dur="3s" repeatCount="indefinite"/></circle>
+</svg>
+<div class="label" style="color:var(--gold)">🌟 AI Mastery<br><span class="sublabel">ทุก Class ปลดล็อกได้</span></div>
+</div>
+
+</div>
+<h3>🎮 คิดแบบเกม RPG</h3>
+<p>
+<b>Data, Cloud, AI, Full Stack</b> = สายอาชีพ เหมือนเลือก <b>Class</b> — Knight, Mage, Assassin, Ranger<br>
+<b>AI Mastery</b> = Ultimate Skill ที่ <b>ทุก Class ปลดล็อกได้</b><br><br>
+ไม่ต้องเลือกระหว่าง AI กับ Cloud — <b>เรียนไปด้วยกันได้</b><br>
+คอร์สที่แนะนำสอน AI รวมอยู่แล้วตั้งแต่ขั้นแรก
+</p>
+</div>
+
+<p class="st-desc" style="margin-top:0">กดที่แต่ละสายด้านล่างเพื่อดูรายละเอียด 👇</p>
+
+<!-- DATA ACCORDION -->
+<div class="acc c-data rv" onclick="toggleAcc(this)">
+<div class="acc-header">
+<div class="acc-chibi"><svg class="chibi-svg" viewBox="0 0 80 95" width="48" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="26" r="20" fill="#f5d0a9"/><path d="M20 22Q23 8 40 6Q57 8 60 22Q58 15 50 11Q40 6 30 11Q22 15 20 22Z" fill="#8B4513"/><ellipse cx="33" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><ellipse cx="47" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><circle cx="34.2" cy="25" r="1.2" fill="#fff"/><circle cx="48.2" cy="25" r="1.2" fill="#fff"/><path d="M36 33Q40 36 44 33" stroke="#c4956a" stroke-width="1.2" fill="none" stroke-linecap="round"/><rect x="27" y="46" width="26" height="22" rx="5" fill="#ff9100"/><circle cx="40" cy="51" r="2" fill="var(--gold)" opacity=".6"/><ellipse cx="24" cy="50" rx="6" ry="5" fill="#e65100"/><ellipse cx="56" cy="50" rx="6" ry="5" fill="#e65100"/><rect x="30" y="68" width="9" height="14" rx="4" fill="#bf360c"/><rect x="41" y="68" width="9" height="14" rx="4" fill="#bf360c"/><ellipse cx="14" cy="58" rx="10" ry="13" fill="#455a64"/><circle cx="14" cy="56" r="3" fill="var(--gold)" opacity=".5"/></svg></div>
+<div class="acc-info"><div class="acc-name">📊 Knight — สาย Data</div><div class="acc-sub">"ผู้เปลี่ยนข้อมูลเป็นพลัง" — เรียนง่ายสุด เข้าถึงง่าย</div></div>
+<div class="acc-arrow">▼</div>
+</div>
+<div class="acc-body"><div class="acc-inner">
+<div class="how-box" style="border-color:rgba(255,145,0,.15);background:linear-gradient(135deg,rgba(255,145,0,.04),rgba(255,213,79,.02))"><h4>📖 เริ่มเรียนยังไง?</h4><p>เริ่มจาก <b>Excel, SQL ที่คุ้นเคย</b> ไม่ต้องเขียนโค้ดยากตั้งแต่แรก ค่อยๆ ต่อยอดไป Python — DataRockie แค่ 4,900 บาทก็ได้ครบ มี Community คอยช่วย ใช้เวลาประมาณ <b>1-2 เดือน</b></p></div>
+<div class="rpg-s"><span class="rpg-s-l">💰 เงินเดือนเริ่ม</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="60"></div></div><span class="rpg-s-v">22-40K</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📢 ต้องสื่อสาร</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="80"></div></div><span class="rpg-s-v">สูง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🔥 ตลาดต้องการ</span><div class="rpg-bar"><div class="rpg-f f-dem" data-w="85"></div></div><span class="rpg-s-v">สูง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="90"></div></div><span class="rpg-s-v">ง่ายสุด ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="55"></div></div><span class="rpg-s-v">คนแข่งเยอะ</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="50"></div></div><span class="rpg-s-v">ต้องคุยเยอะ</span></div>
+<div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Data Analyst, Data Engineer, Data Scientist</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">ธนาคาร, E-commerce, ทุกอุตสาหกรรม</div></div></div>
+<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>ต้องคุยกับคนค่อนข้างเยอะ</b> นำเสนอผลวิเคราะห์ ถ้ายังไม่คล่อง <b>ทำ Dashboard ให้ข้อมูลพูดแทนเรา</b> ข้อดีคือ <b>ทุกบริษัทต้องการ</b></p></div>
+<h4 style="font-size:.75rem;font-weight:700;color:var(--data);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
+<div class="cs"><div class="cs-n">1</div><div><div class="cs-t">Chula MOOC Flexi — Data Analysis & Python</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 เซอร์จุฬาฯ</span><span>🇹🇭 ไทย</span></div><a href="https://cuneuron.chula.ac.th/cumooc-flexi" target="_blank">เข้าเรียน →</a></div></div>
+<div class="cs"><div class="cs-n">2</div><div><div class="cs-t">Thai MOOC — วิเคราะห์ข้อมูลและ ML</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 ได้เซอร์</span><span>🇹🇭 ไทย</span></div><a href="https://thaimooc.ac.th" target="_blank">เข้าเรียน →</a></div></div>
+<div class="cs"><div class="cs-n">3</div><div><div class="cs-t">DataRockie — Data Science Bootcamp 💰</div><div class="cs-m"><span>💰 4,900฿</span><span>🇹🇭 ไทย</span><span>🏆 500+ คนได้งาน</span></div><a href="https://datarockie.com/data-science-bootcamp/" target="_blank">ดูรายละเอียด →</a></div></div>
+<div class="cs"><div class="cs-n">4</div><div><div class="cs-t">BorntoDev — Complete Python 3 💰</div><div class="cs-m"><span>💰 2,990฿</span><span>🇹🇭 ไทย</span><span>♾️ ตลอดชีพ</span></div><a href="https://www.borntodev.com/product/complete-python-3-programming-2/" target="_blank">ดูรายละเอียด →</a></div></div>
+</div></div></div>
+
+<!-- CLOUD ACCORDION -->
+<div class="acc c-cloud rv" onclick="toggleAcc(this)">
+<div class="acc-header">
+<div class="acc-chibi"><svg class="chibi-svg" viewBox="0 0 80 100" width="48" xmlns="http://www.w3.org/2000/svg">
+<!-- Wizard hat -->
+<path d="M22 30 L40 4 L58 30Z" fill="#5e35b1"/>
+<path d="M25 30 L40 8 L55 30Z" fill="#7c4dff" opacity=".4"/>
+<circle cx="40" cy="10" r="4" fill="#ffd54f" opacity=".9"/>
+<path d="M18 30 Q40 36 62 30" fill="#4527a0"/>
+<!-- Head -->
+<circle cx="40" cy="42" r="18" fill="#f5d0a9"/>
+<!-- Hair under hat -->
+<path d="M22 38Q24 28 40 26Q56 28 58 38Q55 32 48 30Q40 27 32 30Q25 32 22 38Z" fill="#2d2d2d"/>
+<!-- Eyes -->
+<ellipse cx="34" cy="42" rx="2.8" ry="3.2" fill="#1a1a2e"/><ellipse cx="46" cy="42" rx="2.8" ry="3.2" fill="#1a1a2e"/>
+<circle cx="35" cy="41" r="1.1" fill="#fff"/><circle cx="47" cy="41" r="1.1" fill="#fff"/>
+<!-- Mouth -->
+<path d="M37 49Q40 52 43 49" stroke="#c4956a" stroke-width="1" fill="none" stroke-linecap="round"/>
+<!-- Blush -->
+<ellipse cx="28" cy="46" rx="3" ry="1.8" fill="#ffb3b3" opacity=".3"/><ellipse cx="52" cy="46" rx="3" ry="1.8" fill="#ffb3b3" opacity=".3"/>
+<!-- Robe -->
+<path d="M26 60 Q22 78 18 96 L62 96 Q58 78 54 60Z" fill="#7c4dff"/>
+<rect x="30" y="62" width="20" height="5" rx="2" fill="#9575cd" opacity=".3"/>
+<!-- Staff -->
+<rect x="64" y="28" width="3" height="48" rx="1.5" fill="#8d6e63"/>
+<circle cx="65.5" cy="26" r="6" fill="#b388ff" opacity=".5"/>
+<circle cx="65.5" cy="26" r="3.5" fill="#e1bee7" opacity=".8"/>
+<circle cx="65.5" cy="26" r="2" fill="#fff" opacity=".4"><animate attributeName="opacity" values=".2;.7;.2" dur="2s" repeatCount="indefinite"/></circle>
+</svg></div>
+<div class="acc-info"><div class="acc-name">☁️ Mage — สาย Cloud / DevOps</div><div class="acc-sub">"ผู้สร้างระบบหลังบ้าน" — ขาดแคลนสุด ได้งานเร็วสุด ไม่ต้องคุยเยอะ ⭐</div></div>
+<div class="acc-arrow">▼</div>
+</div>
+<div class="acc-body"><div class="acc-inner">
+<div class="how-box" style="border-color:rgba(179,136,255,.15);background:linear-gradient(135deg,rgba(179,136,255,.04),rgba(179,136,255,.02))"><h4>📖 เริ่มเรียนยังไง?</h4><p>เริ่มจาก <b>คอร์สฟรีภาษาไทยจาก AWS โดยตรง</b> เรียนรู้ว่า Cloud คืออะไร — เราเรียนวิศวะคอมฯ มา <b>มีพื้นฐาน Terminal/Command Line ที่คนอื่นไม่มี</b> นี่คือข้อได้เปรียบ ใช้เวลาประมาณ <b>2-3 เดือน</b></p></div>
+<div class="rpg-s"><span class="rpg-s-l">💰 เงินเดือนเริ่ม</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="75"></div></div><span class="rpg-s-v">30-60K</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📢 ต้องสื่อสาร</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="35"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🔥 ตลาดต้องการ</span><div class="rpg-bar"><div class="rpg-f f-dem" data-w="98"></div></div><span class="rpg-s-v">ขาดแคลนมาก</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="95"></div></div><span class="rpg-s-v">เร็วสุด ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="95"></div></div><span class="rpg-s-v">เหมาะมาก ⭐</span></div>
+<div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Cloud Engineer, DevOps, Solution Architect</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">บริษัท Tech, ธนาคาร, Remote ต่างประเทศ</div></div></div>
+<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>คุยกับคนน้อยที่สุด</b> ทำงานกับ Terminal, Server เหมาะกับคนที่ <b>ชอบแก้ปัญหาเงียบๆ</b> มักจะ <b>ทำงาน Remote ได้</b> บริษัทต่างชาติจ้างคนไทยเยอะ</p></div>
+<h4 style="font-size:.75rem;font-weight:700;color:var(--cloud);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
+<div class="cs"><div class="cs-n">1</div><div><div class="cs-t">AWS Cloud Practitioner Essentials (ภาษาไทย)</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span><span>☁️ จาก AWS</span></div><a href="https://explore.skillbuilder.aws" target="_blank">เข้าเรียน →</a></div></div>
+<div class="cs"><div class="cs-n">2</div><div><div class="cs-t">Udemy — AWS Cloud ง่ายๆ</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span></div><a href="https://www.udemy.com/course/aws-cloud/" target="_blank">เข้าเรียน →</a></div></div>
+<div class="cs"><div class="cs-n">3</div><div><div class="cs-t">Skooldio — AWS Essentials 💰</div><div class="cs-m"><span>💰 6,490฿</span><span>🇹🇭 ไทย</span><span>♾️ ตลอดชีพ</span></div><a href="https://www.skooldio.com/courses/aws-cloud-essentials-and-core-services" target="_blank">ดูรายละเอียด →</a></div></div>
+<div class="cs"><div class="cs-n">4</div><div><div class="cs-t">สอบ AWS Cloud Practitioner 💰</div><div class="cs-m"><span>💰 ~3,500฿</span><span>🏅 Cert ระดับโลก</span></div><a href="https://aws.amazon.com/certification/certified-cloud-practitioner/" target="_blank">ดูรายละเอียด →</a></div></div>
+</div></div></div>
+
+<!-- AI ACCORDION -->
+<div class="acc c-ai rv" onclick="toggleAcc(this)">
+<div class="acc-header">
+<div class="acc-chibi"><svg class="chibi-svg" viewBox="0 0 80 95" width="48" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="26" r="20" fill="#f5d0a9"/><path d="M20 22Q23 8 40 6Q57 8 60 22Q58 15 50 11Q40 6 30 11Q22 15 20 22Z" fill="#1a1a2e"/><ellipse cx="33" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><ellipse cx="47" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><circle cx="34.2" cy="25" r="1.2" fill="#00e5ff"/><circle cx="48.2" cy="25" r="1.2" fill="#00e5ff"/><path d="M36 33Q40 36 44 33" stroke="#c4956a" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M25 32 Q40 38 55 32 L55 38 Q40 34 25 38Z" fill="#263238" opacity=".6"/><path d="M20 20 Q22 5 40 2 Q58 5 60 20 Q55 10 40 8 Q25 10 20 20Z" fill="#263238"/><rect x="27" y="46" width="26" height="22" rx="5" fill="#263238"/><path d="M35 48 L40 55 L45 48" stroke="#00e5ff" stroke-width="1" fill="none" opacity=".5"/><rect x="30" y="68" width="9" height="14" rx="4" fill="#1a1a2e"/><rect x="41" y="68" width="9" height="14" rx="4" fill="#1a1a2e"/><rect x="10" y="42" width="2.5" height="22" rx="1" fill="#00e5ff" opacity=".7"/><rect x="64" y="42" width="2.5" height="22" rx="1" fill="#b388ff" opacity=".7"/><rect x="60" y="76" width="12" height="10" rx="3" fill="#37474f"/><circle cx="63.5" cy="80" r="1.5" fill="#00e5ff"/><circle cx="68.5" cy="80" r="1.5" fill="#00e5ff"/></svg></div>
+<div class="acc-info"><div class="acc-name">🤖 Assassin — สาย AI / Generative AI</div><div class="acc-sub">"ผู้ควบคุม AI ให้ทำงานแทนมนุษย์" — ร้อนแรงสุดตอนนี้</div></div>
+<div class="acc-arrow">▼</div>
+</div>
+<div class="acc-body"><div class="acc-inner">
+<div class="how-box" style="border-color:rgba(0,229,255,.15);background:linear-gradient(135deg,rgba(0,229,255,.04),rgba(0,229,255,.02))"><h4>📖 เริ่มเรียนยังไง?</h4><p>เริ่มจาก <b>ลองใช้ ChatGPT / Claude ให้เป็น</b> แล้วค่อยเรียนรู้ว่า AI ทำงานยังไง — คอร์สแรกจาก Chula MOOC Snap <b>ใช้เวลาแค่ 1 ชั่วโมง</b> ได้เซอร์ทันที ต่อยอดด้วย Python + ML ใช้เวลาประมาณ <b>2-3 เดือน</b></p></div>
+<div class="rpg-s"><span class="rpg-s-l">💰 เงินเดือนเริ่ม</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="70"></div></div><span class="rpg-s-v">25-45K</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📢 ต้องสื่อสาร</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🔥 ตลาดต้องการ</span><div class="rpg-bar"><div class="rpg-f f-dem" data-w="95"></div></div><span class="rpg-s-v">สูงมาก</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="70"></div></div><span class="rpg-s-v">เร็ว</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="70"></div></div><span class="rpg-s-v">เหมาะ</span></div>
+<div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">AI Engineer, ML Engineer, Prompt Engineer</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">บริษัท Tech, สตาร์ทอัพ, Remote</div></div></div>
+<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p>ทำงาน <b>กับคอมเป็นหลัก</b> เขียนโค้ด ทดลอง AI Model ไม่ต้องคุยเยอะ บริษัทส่วนใหญ่ <b>ยืดหยุ่น ทำ Remote ได้</b></p></div>
+<h4 style="font-size:.75rem;font-weight:700;color:var(--ai);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
+<div class="cs"><div class="cs-n">1</div><div><div class="cs-t">Chula MOOC Snap — Generative AI & ChatGPT</div><div class="cs-m"><span>🆓 ฟรี</span><span>⏱️ 1 ชม.</span><span>📜 ได้เซอร์</span><span>🇹🇭 ไทย</span></div><a href="https://mooc.chula.ac.th" target="_blank">เข้าเรียน →</a></div></div>
+<div class="cs"><div class="cs-n">2</div><div><div class="cs-t">Thai MOOC — ปลดล็อกพลัง AI ด้วย Python</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 ได้เซอร์</span><span>🇹🇭 ไทย</span></div><a href="https://thaimooc.ac.th" target="_blank">เข้าเรียน →</a></div></div>
+<div class="cs"><div class="cs-n">3</div><div><div class="cs-t">NIDA — ML, Deep Learning</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 ได้เซอร์</span><span>🇹🇭 ไทย</span></div><a href="https://thaimooc.ac.th" target="_blank">เข้าเรียน →</a></div></div>
+<div class="cs"><div class="cs-n">4</div><div><div class="cs-t">BorntoDev — Gen AI For Developer 💰</div><div class="cs-m"><span>💰 เสียเงิน</span><span>🇹🇭 ไทย</span><span>💻 สายวิศวะ</span></div><a href="https://campaign.borntodev.com/training/gen-ai-for-dev" target="_blank">ดูรายละเอียด →</a></div></div>
+</div></div></div>
+
+<!-- FULL STACK ACCORDION -->
+<div class="acc c-fs rv" onclick="toggleAcc(this)">
+<div class="acc-header">
+<div class="acc-chibi"><svg class="chibi-svg" viewBox="0 0 80 95" width="48" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="26" r="20" fill="#f5d0a9"/><path d="M20 22Q23 8 40 6Q57 8 60 22Q58 15 50 11Q40 6 30 11Q22 15 20 22Z" fill="#5d4037"/><ellipse cx="33" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><ellipse cx="47" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><circle cx="34.2" cy="25" r="1.2" fill="#fff"/><circle cx="48.2" cy="25" r="1.2" fill="#fff"/><path d="M36 33Q40 36 44 33" stroke="#c4956a" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M20 18 Q22 6 40 3 Q58 6 60 18 Q55 12 40 9 Q25 12 20 18Z" fill="#2e7d32"/><path d="M22 20 Q15 50 10 82 L28 80Z" fill="#388e3c" opacity=".6"/><path d="M58 20 Q65 50 70 82 L52 80Z" fill="#388e3c" opacity=".6"/><rect x="27" y="46" width="26" height="22" rx="5" fill="#43a047"/><rect x="27" y="62" width="26" height="4" rx="2" fill="#5d4037"/><rect x="30" y="68" width="9" height="14" rx="4" fill="#33691e"/><rect x="41" y="68" width="9" height="14" rx="4" fill="#33691e"/><path d="M62 20 Q72 45 62 70" stroke="#8d6e63" stroke-width="2.5" fill="none"/></svg></div>
+<div class="acc-info"><div class="acc-name">🌐 Ranger — สาย Full Stack Developer</div><div class="acc-sub">"นักผจญภัยที่ทำได้ทั้ง Front และ Back" — เห็นผลเร็ว เงินเดือนเริ่มสูง</div></div>
+<div class="acc-arrow">▼</div>
+</div>
+<div class="acc-body"><div class="acc-inner">
+<div class="how-box" style="border-color:rgba(76,175,80,.15);background:linear-gradient(135deg,rgba(76,175,80,.04),rgba(76,175,80,.02))"><h4>📖 เริ่มเรียนยังไง?</h4><p>เริ่มจาก <b>HTML + CSS สร้างหน้าเว็บง่ายๆ</b> เขียนวันนี้เปิดดูผลได้ทันที ไม่ต้องมีพื้นฐานอะไรมาก่อน ค่อยต่อไป JavaScript แล้ว Backend — ข้อดีคือ<b>เห็นผลลัพธ์บนหน้าจอทันทีทุกครั้งที่เขียน</b> ทำให้สนุกและมีแรงเรียนต่อ ใช้เวลาประมาณ <b>3-4 เดือน</b></p></div>
+<div class="rpg-s"><span class="rpg-s-l">💰 เงินเดือนเริ่ม</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="80"></div></div><span class="rpg-s-v">38-68K ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📢 ต้องสื่อสาร</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🔥 ตลาดต้องการ</span><div class="rpg-bar"><div class="rpg-f f-dem" data-w="88"></div></div><span class="rpg-s-v">สูง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="80"></div></div><span class="rpg-s-v">เร็ว</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="65"></div></div><span class="rpg-s-v">เหมาะ</span></div>
+<div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Full Stack Developer, Frontend Dev, Backend Dev</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">ทุกบริษัท Tech, สตาร์ทอัพ, Remote ต่างประเทศ</div></div></div>
+<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p>ทำงาน<b>สร้างเว็บแอปที่ใช้งานจริง</b> ทั้งหน้าบ้าน (สิ่งที่ user เห็น) และหลังบ้าน (Server, Database) คุยกับทีมบ้าง แต่ไม่เยอะเท่า Data สามารถ<b>ทำงาน Remote ให้ต่างชาติได้</b> เงินเดือนอาจสูงถึง 2-4 เท่าของบริษัทไทย</p></div>
+<h4 style="font-size:.75rem;font-weight:700;color:var(--green);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
+<div class="cs"><div class="cs-n">1</div><div><div class="cs-t">BorntoDev YouTube — HTML/CSS/JS ฟรี</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span><span>👀 เห็นผลทันที</span></div><a href="https://www.youtube.com/@BorntoDev" target="_blank">ดูบน YouTube →</a></div></div>
+<div class="cs"><div class="cs-n">2</div><div><div class="cs-t">Chula MOOC Flexi — เขียนเว็บ & Python</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 เซอร์จุฬาฯ</span><span>🇹🇭 ไทย</span></div><a href="https://cuneuron.chula.ac.th/cumooc-flexi" target="_blank">เข้าเรียน →</a></div></div>
+<div class="cs"><div class="cs-n">3</div><div><div class="cs-t">BorntoDev — Complete Python 3 💰</div><div class="cs-m"><span>💰 2,990฿</span><span>🇹🇭 ไทย</span><span>♾️ ตลอดชีพ</span></div><a href="https://www.borntodev.com/product/complete-python-3-programming-2/" target="_blank">ดูรายละเอียด →</a></div></div>
+<div class="cs"><div class="cs-n">4</div><div><div class="cs-t">BorntoDev — Road to Full Stack 2026 💰</div><div class="cs-m"><span>💰 เสียเงิน</span><span>🇹🇭 ไทย</span><span>💻 ครบทั้ง Front+Back</span></div><a href="https://www.borntodev.com" target="_blank">ดูรายละเอียด →</a></div></div>
+</div></div></div>
+
+<!-- ROADMAP -->
+<div class="moti rv"><div class="big">🗺️</div><h3>เส้นทางที่แนะนำ — ค่อยๆ ไปทีละขั้น</h3><p style="text-align:left;max-width:560px">
+<b>🌱 เดือนที่ 1-2: เรียน Data + AI พื้นฐาน ไปพร้อมกัน</b><br>
+Python, SQL, การวิเคราะห์ข้อมูล <b>เป็นพื้นฐานที่ใช้ได้กับทุกสาย</b> เหมือนฝึกพื้นฐานก่อนเลือก Class — คอร์สที่แนะนำสอน AI/ML รวมอยู่แล้ว<br><br>
+<b>🔀 เดือนที่ 3+: เลือกสายที่ชอบ</b><br>
+▸ ชอบ <b>แก้ปัญหาเงียบๆ</b> → ไป <b>Cloud (Mage)</b><br>
+▸ ชอบ <b>สร้างของใหม่ ทดลอง AI</b> → ไป <b>AI ลึกขึ้น (Assassin)</b><br>
+▸ ชอบ <b>สร้างเว็บ เห็นผลทันที</b> → ไป <b>Full Stack (Ranger)</b><br>
+▸ ชอบ <b>วิเคราะห์ตัวเลข</b> → ไป <b>Data ลึกขึ้น (Knight)</b><br><br>
+<b>💡 อนาคต:</b> เมื่อทำงาน 2-3 ปีแล้ว สามารถต่อยอดไป <b>DevOps</b> หรือ <b>Security</b> ได้อีก<br><br>
+<b>เปลี่ยนได้เสมอ ไม่ต้องกลัวเลือกผิด</b>
+</p></div>
+</div>
+
+<!-- ====== PANEL: INTERN ====== -->
+<div class="main-panel" id="p-intern">
+<div class="st-badge">🏢 INTERNSHIP QUEST</div>
+<div class="st-title">🏢 เรื่องฝึกงาน — สำคัญกว่าที่คิด</div>
+<p class="st-desc">ฝึกงานไม่ใช่แค่ "ส่งอาจารย์" แต่คือ <b>โอกาสได้งานตัวจริง</b> ถ้าฝึกงานดี <b>จบมาได้งานเลยไม่ต้องสมัครใหม่</b></p>
+<div class="highlight-box rv"><h4>💡 สิ่งที่ควรรู้</h4><p><b>▸ ฝึกงานบริษัท Tech</b> ได้ประสบการณ์เยอะกว่าราชการ ได้ทำงานจริง ได้ Connection ได้ Portfolio<br><b>▸ เตรียม Resume + GitHub ก่อนสมัคร</b> — มี cert 2-3 ใบ จะโดดเด่นกว่าคนอื่นทันที<br><b>▸ ฝึกงานดี = จบมาได้งานเลย</b></p></div>
+
+<div style="background:linear-gradient(135deg,rgba(76,175,80,.06),rgba(255,213,79,.04));border:1px solid rgba(76,175,80,.15);border-radius:14px;padding:1.2rem;margin-bottom:1rem" class="rv">
+<div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.6rem"><span style="background:var(--green);color:#fff;font-size:.55rem;font-weight:800;padding:.2rem .55rem;border-radius:5px;letter-spacing:.5px">✅ เคยรับนศ.สวนสุนันทา</span><span style="font-size:.75rem;font-weight:700;color:var(--green)">โอกาสสูง — รุ่นพี่เคยฝึกงานจริง</span></div>
+<p style="font-size:.75rem;color:var(--txt2);margin-bottom:.8rem;line-height:1.7">บริษัทเหล่านี้<b>เคยรับนักศึกษาวิศวกรรมคอมพิวเตอร์ สวนสุนันทา ฝึกงานจริง</b>ในปี 2568 (ข้อมูลจากการนิเทศน์ของอาจารย์หัวหน้าสาขา) — สมัครที่เหล่านี้มีโอกาสได้รับเข้าสูงกว่าปกติ เพราะ<b>บริษัทรู้จักสวนสุนันทาอยู่แล้ว</b></p>
+
+<div class="intern-card" style="border-color:rgba(76,175,80,.12);margin-bottom:.5rem"><h4>🏢 บริษัท มาสเตอร์สไตล์ จำกัด (มหาชน)</h4><div class="org">✅ เคยรับ นศ.สวนสุนันทา ปี 68 • บริษัทมหาชน</div><p>บริษัทจดทะเบียนในตลาดหลักทรัพย์ ทำธุรกิจด้านเทคโนโลยีและโซลูชัน ฝึกงานที่นี่ได้ประสบการณ์ระดับองค์กรใหญ่</p></div>
+
+<div class="intern-card" style="border-color:rgba(76,175,80,.12);margin-bottom:.5rem"><h4>💻 บริษัท ออเร้นจ์ เทคโนโลยี โซลูชั่น</h4><div class="org">✅ เคยรับ นศ.สวนสุนันทา ปี 68 • ออกแบบและจัดทำเว็บไซต์</div><p>บริษัทสาย Full Stack/Web Dev โดยตรง ได้ลงมือทำงานจริง เหมาะกับสาย Ranger (Full Stack) มาก</p></div>
+
+<div class="intern-card" style="border-color:rgba(76,175,80,.12);margin-bottom:.5rem"><h4>🔧 บริษัท สี่จุดศูนย์ จำกัด</h4><div class="org">✅ เคยรับ นศ.สวนสุนันทา ปี 68 • Tech Company</div><p>บริษัทเทคโนโลยี ได้เรียนรู้การทำงานจริงในทีม Dev</p></div>
+
+<div class="intern-card" style="border-color:rgba(76,175,80,.12);margin-bottom:.5rem"><h4>⚙️ หจก. พีเอส ซิสเต็ม</h4><div class="org">✅ เคยรับ นศ.สวนสุนันทา ปี 68 • System & IT</div><p>ทำงานด้านระบบ IT เหมาะกับสาย Cloud/DevOps ได้ดูแลระบบจริง</p></div>
+
+<div class="intern-card" style="border-color:rgba(76,175,80,.12);margin-bottom:.5rem"><h4>💾 Western Digital (ประเทศไทย)</h4><div class="org">✅ มีความร่วมมือกับคณะวิศวกรรมฯ สวนสุนันทา • บริษัทระดับโลก</div><p>บริษัทผลิต Storage ระดับโลก มีโรงงานในไทย ฝึกงานที่นี่ได้ชื่อบริษัทใหญ่ใส่ Resume ทันที</p></div>
+</div>
+
+<p class="st-desc rv" style="font-size:.72rem;color:var(--txt3);margin-top:0;margin-bottom:1rem">📌 ข้อมูลจากกระทู้ Pantip โดยสาขาวิศวกรรมคอมฯ สวนสุนันทา (ก.พ.-มี.ค. 2568) และเว็บคณะวิศวกรรมศาสตร์ฯ สวนสุนันทา — ติดตามข้อมูลล่าสุดที่ <a href="https://www.facebook.com/ComputerEngineeringSSRU" target="_blank" style="color:var(--ai)">Facebook: CE SSRU</a></p>
+
+<div class="st-badge rv" style="margin-top:.5rem">🌐 บริษัทอื่นที่น่าสนใจ</div>
+<div class="intern-card rv"><h4>🏦 SCB TechX / SCBX</h4><div class="org">ธนาคารไทยพาณิชย์</div><p>ได้ทำงานจริงกับ Project ระดับองค์กร มี mentoring</p><a href="https://scbtechx.io/th/news/others/techx-internship-program-2025/" target="_blank" class="link-btn">🔗 SCB TechX</a><a href="https://www.scbx.com/th/career/internship/" target="_blank" class="link-btn">🔗 SCBX</a></div>
+<div class="intern-card rv"><h4>🍜 LINE MAN Wongnai</h4><div class="org">Junior 2026 — 10 สัปดาห์</div><p>ได้ collaborate กับ experts สร้าง impact ระดับประเทศ</p><a href="https://careers.lmwn.com/junior-2026-summer-internship" target="_blank" class="link-btn">🔗 สมัคร</a></div>
+<div class="intern-card rv"><h4>🌐 เว็บรวมฝึกงาน IT</h4><div class="org">หลายร้อยตำแหน่ง อัปเดตทุกวัน</div><p>มี AI แนะนำงาน สมัครฟรี</p><a href="https://internth.com/ฝึกงาน" target="_blank" class="link-btn">🔗 internth.com</a><a href="https://th.jobsdb.com/th/computer-engineering-internship-jobs" target="_blank" class="link-btn">🔗 Jobsdb</a></div>
+</div>
+
+<!-- ====== PANEL: PROFILE ====== -->
+<div class="main-panel" id="p-profile">
+<div class="st-badge">📄 EQUIPMENT</div>
+<div class="st-title">Resume, LinkedIn, GitHub</div>
+<p class="st-desc">3 สิ่งนี้ทำให้ <b>บริษัทมาหาเรา</b> ไม่ใช่เราไปหาบริษัท</p>
+<div class="card rv"><h3>📄 Resume</h3><p style="margin-top:.3rem">บริษัท Tech ไม่ดูเกรด ดูว่า <b>ทำอะไรเป็น</b>:</p><ul><li><b>โปรเจกต์</b> (ลิงก์ GitHub)</li><li><b>เครื่องมือ</b> (Python, SQL, AWS)</li><li><b>ใบ cert</b> (ฟรีทุกใบใส่ได้)</li></ul><div style="margin-top:.5rem"><a href="https://flowcv.com" target="_blank" class="link-btn">📎 สร้างฟรี (FlowCV)</a><a href="https://www.overleaf.com/latex/templates/tagged/cv" target="_blank" class="link-btn">📎 ตัวอย่าง</a><a href="https://www.youtube.com/results?search_query=resume+เด็กจบใหม่+IT+ภาษาไทย" target="_blank" class="link-btn">🎬 YouTube ไทย</a></div></div>
+<div class="card rv"><h3>💼 LinkedIn</h3><p style="margin-top:.3rem">บริษัท Tech ต่างชาติ <b>ใช้ LinkedIn หาคน ไม่ใช่ JobThai</b> — มี Profile ดี HR มาหาเราเอง เหมาะกับคนไม่กล้าสมัคร</p><ul><li><b>Headline:</b> "Computer Engineering | Python | AI | Cloud"</li><li><b>Cert:</b> ใบฟรีทุกใบใส่ได้หมด</li><li><b>ภาษา:</b> เขียนอังกฤษ — ใช้ Claude แปล</li></ul><div style="margin-top:.5rem"><a href="https://www.linkedin.com" target="_blank" class="link-btn">📎 สมัคร</a><a href="https://www.youtube.com/results?search_query=สร้าง+linkedin+เด็กจบใหม่+IT" target="_blank" class="link-btn">🎬 YouTube ไทย</a></div></div>
+<div class="card rv"><h3>🐱 GitHub</h3><p style="margin-top:.3rem">บริษัท Tech <b>ดู GitHub ก่อนดู Resume</b> — มีโปรเจกต์ 3-5 ชิ้นก็พอ</p><ul><li><b>สร้าง Repo 3-5 ชิ้น</b> จากคอร์สที่เรียน</li><li><b>เขียน README</b> อธิบายว่าทำอะไร</li><li>ทุกครั้งที่เรียนจบ <b>เอาโปรเจกต์ขึ้นทันที</b></li></ul><div style="margin-top:.5rem"><a href="https://github.com" target="_blank" class="link-btn">📎 สมัคร</a><a href="https://github.com/abhisheknaiidu/awesome-github-profile-readme" target="_blank" class="link-btn">🌟 ตัวอย่าง</a><a href="https://www.youtube.com/results?search_query=github+portfolio+สอน+ภาษาไทย" target="_blank" class="link-btn">🎬 YouTube ไทย</a></div></div>
+</div>
+
+<!-- ====== PANEL: COMM ====== -->
+<div class="main-panel" id="p-comm">
+<div class="st-badge">🎤 SKILL UNLOCK</div>
+<div class="st-title">🎤 ไม่ต้องพูดเก่งก็ทำงาน Tech ได้</div>
+<p class="st-desc">สาย Tech มี <b>วิธีสื่อสารที่ไม่ต้องพูดเก่ง</b> หลายวิธี</p>
+<div class="card rv"><h3>📝 สื่อสารด้วยการเขียน</h3><ul><li><b>เขียน Documentation ดีๆ</b> — คนอ่านเข้าใจ ไม่ต้องมาถาม</li><li><b>ทำ Dashboard</b> ให้ข้อมูลพูดแทน</li><li><b>คุยผ่าน Slack/Teams</b> — เขียนชัดก็พอ</li><li><b>เขียน README ใน GitHub</b> — บริษัทเห็นว่าสื่อสารเป็น</li></ul></div>
+<div class="card rv"><h3>🎯 สายไหนคุยเยอะ สายไหนไม่ต้อง</h3><ul><li><b>☁️ Cloud/DevOps — คุยน้อยสุด ⭐</b> ทำงานกับ Server</li><li><b>🤖 AI — ปานกลาง</b> คุยกับทีมบ้าง</li><li><b>📊 Data — เยอะสุด</b> ต้องนำเสนอ แต่ฝึกได้ด้วย Dashboard</li></ul></div>
+<div class="highlight-box rv"><h4>💡 ทักษะสื่อสารฝึกได้</h4><p>วิธีฝึกที่ดีที่สุดคือ <b>ทำโปรเจกต์แล้วเขียนอธิบาย</b> — เขียน README, ตอบคำถามใน Discord ก็คือฝึกสื่อสาร ไม่ต้องเรียนคอร์สพูด</p></div>
+</div>
+
+<!-- ====== PANEL: TIPS ====== -->
+<div class="main-panel" id="p-tips">
+<div class="st-badge">💡 POWER UPS</div>
+<div class="st-title">เคล็ดลับเลเวลอัพ</div>
+<div class="tip rv"><div class="tip-i">🎯</div><div><h4>เริ่มเล็ก ชนะเร็ว</h4><p>Chula MOOC Snap คอร์สแรก 1 ชม. → ได้เซอร์จุฬาฯ ทันที</p></div></div>
+<div class="tip rv"><div class="tip-i">🌍</div><div><h4>ภาษาอังกฤษ — ใช้ AI ช่วย</h4><p>เจอ error ภาษาอังกฤษ copy วางใน Claude "อธิบายเป็นภาษาไทย" ทำ 3-6 เดือนจะอ่านออกเอง</p></div></div>
+<div class="tip rv"><div class="tip-i">📁</div><div><h4>สร้าง GitHub ไปพร้อมเรียน</h4><p>เรียนจบ → ขึ้น GitHub ทันที จบ 5 คอร์ส = 5 โปรเจกต์ = Portfolio พร้อม</p></div></div>
+<div class="tip rv"><div class="tip-i">🏢</div><div><h4>ฝึกงาน Tech ดีกว่าราชการ</h4><p>ได้ทำงานจริง ได้ Connection — บ่อยครั้ง <b>ฝึกจบ ได้งานเลย</b></p></div></div>
+<div class="tip rv"><div class="tip-i">💰</div><div><h4>งบแค่ 5,000-10,000 บาท</h4><p>DataRockie + BorntoDev = ได้ Python, SQL, AI/ML ครบ</p></div></div>
+</div>
+
+<!-- CTA -->
+<div class="cta-final">
+<div class="moti"><div class="big">🌱</div><h3>ไม่ต้องเก่งตั้งแต่วันแรก แค่เริ่มก็พอ</h3><p>ทุกคนที่เก่งในวันนี้ ก็เคยเริ่มจากไม่รู้อะไรเลย<br>คอร์สแรก 1 ชั่วโมง ลองดูก่อน ถ้าไม่ชอบก็ไม่เป็นไร<br><b>แค่ลองก็ถือว่าเก่งแล้ว</b></p></div>
+<p>พร้อมแล้วลองดู — ไม่มีข้อผูกมัด 👇</p>
+<a href="https://mooc.chula.ac.th" target="_blank" class="btn-g" style="text-decoration:none">🌱 ลองคอร์สแรกดู (ฟรี!)</a>
+</div>
+
+<footer class="footer">
+<p class="px">CAREER QUEST — YOUR OWN PACE</p>
+<p>จัดทำด้วย ❤️ จากคนที่เชื่อว่าเราทำได้ • มีนาคม 2026</p>
+</footer>
+</div>
+
+<script>
+const sf=document.getElementById('sf');for(let i=0;i<40;i++){const s=document.createElement('div');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDuration=(2+Math.random()*5)+'s';s.style.animationDelay=Math.random()*3+'s';const sz=1+Math.random()*1.5;s.style.width=sz+'px';s.style.height=sz+'px';sf.appendChild(s)}
+function showPanel(id){document.querySelectorAll('.main-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.mt-btn').forEach(b=>b.classList.remove('active'));const panel=document.getElementById('p-'+id);if(panel){panel.classList.add('active');initReveals(panel);animBars(panel)}const map={paths:0,intern:1,profile:2,comm:3,tips:4};const tabs=document.querySelectorAll('.mt-btn');if(tabs[map[id]])tabs[map[id]].classList.add('active');window.scrollTo({top:document.getElementById('mainTabs').offsetTop-48,behavior:'smooth'})}
+function toggleAcc(el){el.classList.toggle('open');if(el.classList.contains('open'))animBars(el)}
+function initReveals(c){const els=(c||document).querySelectorAll('.rv');const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.04,rootMargin:'0px 0px -15px 0px'});els.forEach(el=>{el.classList.remove('vis');obs.observe(el)})}
+function animBars(c){const bars=(c||document).querySelectorAll('.rpg-f[data-w]');bars.forEach((b,i)=>{const w=b.dataset.w;b.style.width='0%';setTimeout(()=>{b.style.width=w+'%'},100+i*60)})}
+initReveals();animBars();
+</script>
+</body>
+</html>
