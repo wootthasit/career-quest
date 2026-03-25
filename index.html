@@ -86,6 +86,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .acc.c-cloud .acc-name{color:var(--cloud)}.acc.c-cloud .vibe h4,.acc.c-cloud .cs a,.acc.c-cloud .how-box h4{color:var(--cloud)}.acc.c-cloud .cs-n{background:var(--cloud)}
 .acc.c-ai .acc-name{color:var(--ai)}.acc.c-ai .vibe h4,.acc.c-ai .cs a,.acc.c-ai .how-box h4{color:var(--ai)}.acc.c-ai .cs-n{background:var(--ai)}
 .acc.c-fs .acc-name{color:var(--green)}.acc.c-fs .vibe h4,.acc.c-fs .cs a,.acc.c-fs .how-box h4{color:var(--green)}.acc.c-fs .cs-n{background:var(--green)}
+.acc.c-mob .acc-name{color:#e91e63}.acc.c-mob .vibe h4,.acc.c-mob .cs a,.acc.c-mob .how-box h4{color:#e91e63}.acc.c-mob .cs-n{background:#e91e63}
 .rpg-s{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
 .rpg-s-l{font-size:.67rem;font-weight:700;color:var(--txt2);min-width:110px;white-space:nowrap}
 .rpg-bar{flex:1;height:11px;background:rgba(255,255,255,.04);border-radius:6px;overflow:hidden;min-width:60px;border:1px solid rgba(255,255,255,.03)}
@@ -342,18 +343,19 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <!-- ====== PANEL: PATHS ====== -->
 <div class="main-panel active" id="p-paths">
 <div class="st-badge">🗺️ EXPLORE YOUR PATH</div>
-<div class="st-title">สำรวจ 4 สายอาชีพ</div>
+<div class="st-title">สำรวจ 5 สายอาชีพ</div>
 <p class="st-desc">ไม่ต้องเลือกตอนนี้ก็ได้ แค่ดูว่าแต่ละสายทำอะไร แล้วลองถามตัวเองว่า "อันไหนดูน่าลองดี?"</p>
 
 <!-- COMPARISON TABLE -->
 <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid var(--dim);margin-bottom:1.5rem" class="rv">
 <table class="cmp-table" style="margin-bottom:0;border:none">
-<thead><tr><th>สาย</th><th>เรียนง่าย</th><th>เงินเดือน</th><th>ได้งานเร็ว</th><th>คุยกับคน</th><th>เวลาเรียน</th><th>เหมาะกับเรา?</th></tr></thead>
+<thead><tr><th>สาย</th><th>เรียนง่าย</th><th>เงินเดือน</th><th>ได้งานเร็ว</th><th>คุยกับคน</th><th>กดดัน</th><th>เวลาเรียน</th><th>เหมาะกับเรา?</th></tr></thead>
 <tbody>
-<tr><td>📊 Data</td><td class="stars-r">★★★★★</td><td>22-40K</td><td class="stars-r">★★★</td><td>เยอะ</td><td>1-2 ด.</td><td class="fit-yes">✅ เริ่มต้นดี</td></tr>
-<tr class="cmp-highlight"><td>☁️ Cloud</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★★★★</td><td>น้อย</td><td>2-3 ด.</td><td class="fit-yes">✅✅ เหมาะมาก</td></tr>
-<tr><td>🤖 AI</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★</td><td>ปานกลาง</td><td>2-3 ด.</td><td class="fit-ok">✅ ต่อยอดดี</td></tr>
-<tr><td>🌐 Full Stack</td><td class="stars-r">★★★</td><td>38-68K</td><td class="stars-r">★★★★</td><td>ปานกลาง</td><td>3-4 ด.</td><td class="fit-ok">✅ เห็นผลเร็ว</td></tr>
+<tr><td>📊 Data</td><td class="stars-r">★★★★★</td><td>22-40K</td><td class="stars-r">★★★</td><td>เยอะ</td><td style="color:#4caf50">น้อย</td><td>1-2 ด.</td><td class="fit-yes">✅ เริ่มต้นดี</td></tr>
+<tr class="cmp-highlight"><td>☁️ Cloud</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★★★★</td><td>น้อย</td><td style="color:#4caf50">น้อย</td><td>2-3 ด.</td><td class="fit-yes">✅✅ เหมาะมาก</td></tr>
+<tr><td>🤖 AI</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★</td><td>ปานกลาง</td><td style="color:var(--data)">ปานกลาง</td><td>2-3 ด.</td><td class="fit-ok">✅ ต่อยอดดี</td></tr>
+<tr><td>🌐 Full Stack</td><td class="stars-r">★★★</td><td>38-68K</td><td class="stars-r">★★★★</td><td>ปานกลาง</td><td style="color:var(--data)">ปานกลาง</td><td>3-4 ด.</td><td class="fit-ok">✅ เห็นผลเร็ว</td></tr>
+<tr><td>📱 Mobile</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★★★</td><td>น้อย</td><td style="color:#4caf50">น้อย</td><td>3-4 ด.</td><td class="fit-ok">✅ สนุก เห็นผลเร็ว</td></tr>
 </tbody>
 </table>
 </div>
@@ -488,6 +490,36 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="label" style="color:var(--green)">🌐 Ranger<br><span class="sublabel">สาย Full Stack</span></div>
 </div>
 
+<!-- SUMMONER (Mobile Dev) -->
+<div class="rpg-char">
+<svg class="chibi-svg" viewBox="0 0 80 100" width="65" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="30" r="18" fill="#f5d0a9"/>
+<path d="M22 26Q25 12 40 10Q55 12 58 26Q55 19 48 16Q40 12 32 16Q25 19 22 26Z" fill="#e91e63"/>
+<ellipse cx="34" cy="30" rx="2.8" ry="3.2" fill="#1a1a2e"/><ellipse cx="46" cy="30" rx="2.8" ry="3.2" fill="#1a1a2e"/>
+<circle cx="35" cy="29" r="1.1" fill="#fff"/><circle cx="47" cy="29" r="1.1" fill="#fff"/>
+<path d="M37 37Q40 40 43 37" stroke="#c4956a" stroke-width="1" fill="none" stroke-linecap="round"/>
+<ellipse cx="28" cy="34" rx="3" ry="1.8" fill="#ffb3b3" opacity=".3"/><ellipse cx="52" cy="34" rx="3" ry="1.8" fill="#ffb3b3" opacity=".3"/>
+<!-- Robe with stars -->
+<rect x="27" y="48" width="26" height="24" rx="5" fill="#e91e63"/>
+<rect x="30" y="50" width="20" height="5" rx="2" fill="#f48fb1" opacity=".3"/>
+<circle cx="35" cy="58" r="1.5" fill="var(--gold)" opacity=".5"/>
+<circle cx="45" cy="62" r="1" fill="var(--gold)" opacity=".4"/>
+<rect x="30" y="72" width="9" height="14" rx="4" fill="#ad1457"/>
+<rect x="41" y="72" width="9" height="14" rx="4" fill="#ad1457"/>
+<rect x="28" y="82" width="13" height="7" rx="3" fill="#880e4f"/>
+<rect x="39" y="82" width="13" height="7" rx="3" fill="#880e4f"/>
+<!-- Phone/crystal ball floating -->
+<rect x="55" y="38" width="16" height="26" rx="3" fill="#37474f"/>
+<rect x="57" y="41" width="12" height="18" rx="1.5" fill="#1a1a2e"/>
+<rect x="58" y="42" width="10" height="15" rx="1" fill="#00bcd4" opacity=".3"/>
+<circle cx="63" cy="49" r="4" fill="#00e5ff" opacity=".3"><animate attributeName="opacity" values=".15;.4;.15" dur="2s" repeatCount="indefinite"/></circle>
+<!-- Small sparkles around phone -->
+<circle cx="58" y="36" r="1.5" fill="var(--gold)" opacity=".5"><animate attributeName="opacity" values=".2;.7;.2" dur="1.5s" repeatCount="indefinite"/></circle>
+<circle cx="72" cy="44" r="1" fill="#00e5ff" opacity=".4"><animate attributeName="opacity" values=".2;.6;.2" dur="2s" repeatCount="indefinite" begin=".5s"/></circle>
+</svg>
+<div class="label" style="color:#e91e63">📱 Summoner<br><span class="sublabel">สาย Mobile Dev</span></div>
+</div>
+
 <!-- ULTIMATE SKILL -->
 <div class="rpg-char" style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end">
 <div style="font-size:.5rem;color:var(--gold);font-weight:700;margin-bottom:.4rem;text-align:center">ULTIMATE<br>SKILL</div>
@@ -507,7 +539,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 </div>
 <h3>🎮 คิดแบบเกม RPG</h3>
 <p>
-<b>Data, Cloud, AI, Full Stack</b> = สายอาชีพ เหมือนเลือก <b>Class</b> — Knight, Mage, Assassin, Ranger<br>
+<b>Data, Cloud, AI, Full Stack, Mobile</b> = สายอาชีพ เหมือนเลือก <b>Class</b><br>
 <b>AI Mastery</b> = Ultimate Skill ที่ <b>ทุก Class ปลดล็อกได้</b><br><br>
 ไม่ต้องเลือกระหว่าง AI กับ Cloud — <b>เรียนไปด้วยกันได้</b><br>
 คอร์สที่แนะนำสอน AI รวมอยู่แล้วตั้งแต่ขั้นแรก
@@ -531,6 +563,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="90"></div></div><span class="rpg-s-v">ง่ายสุด ⭐</span></div>
 <div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="55"></div></div><span class="rpg-s-v">คนแข่งเยอะ</span></div>
 <div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="50"></div></div><span class="rpg-s-v">ต้องคุยเยอะ</span></div>
+<div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="35"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Data Analyst, Data Engineer, Data Scientist</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">ธนาคาร, E-commerce, ทุกอุตสาหกรรม</div></div></div>
 <div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>ต้องคุยกับคนค่อนข้างเยอะ</b> นำเสนอผลวิเคราะห์ ถ้ายังไม่คล่อง <b>ทำ Dashboard ให้ข้อมูลพูดแทนเรา</b> ข้อดีคือ <b>ทุกบริษัทต้องการ</b></p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--data);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
@@ -580,6 +613,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
 <div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="95"></div></div><span class="rpg-s-v">เร็วสุด ⭐</span></div>
 <div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="95"></div></div><span class="rpg-s-v">เหมาะมาก ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="30"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Cloud Engineer, DevOps, Solution Architect</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">บริษัท Tech, ธนาคาร, Remote ต่างประเทศ</div></div></div>
 <div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>คุยกับคนน้อยที่สุด</b> ทำงานกับ Terminal, Server เหมาะกับคนที่ <b>ชอบแก้ปัญหาเงียบๆ</b> มักจะ <b>ทำงาน Remote ได้</b> บริษัทต่างชาติจ้างคนไทยเยอะ</p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--cloud);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
@@ -604,6 +638,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
 <div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="70"></div></div><span class="rpg-s-v">เร็ว</span></div>
 <div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="70"></div></div><span class="rpg-s-v">เหมาะ</span></div>
+<div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">AI Engineer, ML Engineer, Prompt Engineer</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">บริษัท Tech, สตาร์ทอัพ, Remote</div></div></div>
 <div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p>ทำงาน <b>กับคอมเป็นหลัก</b> เขียนโค้ด ทดลอง AI Model ไม่ต้องคุยเยอะ บริษัทส่วนใหญ่ <b>ยืดหยุ่น ทำ Remote ได้</b></p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--ai);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
@@ -628,6 +663,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
 <div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="80"></div></div><span class="rpg-s-v">เร็ว</span></div>
 <div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="65"></div></div><span class="rpg-s-v">เหมาะ</span></div>
+<div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="70"></div></div><span class="rpg-s-v">ปานกลาง-สูง</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Full Stack Developer, Frontend Dev, Backend Dev</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">ทุกบริษัท Tech, สตาร์ทอัพ, Remote ต่างประเทศ</div></div></div>
 <div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p>ทำงาน<b>สร้างเว็บแอปที่ใช้งานจริง</b> ทั้งหน้าบ้าน (สิ่งที่ user เห็น) และหลังบ้าน (Server, Database) คุยกับทีมบ้าง แต่ไม่เยอะเท่า Data สามารถ<b>ทำงาน Remote ให้ต่างชาติได้</b> เงินเดือนอาจสูงถึง 2-4 เท่าของบริษัทไทย</p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--green);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
@@ -637,6 +673,44 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="cs"><div class="cs-n">4</div><div><div class="cs-t">BorntoDev — Road to Full Stack 2026 💰</div><div class="cs-m"><span>💰 เสียเงิน</span><span>🇹🇭 ไทย</span><span>💻 ครบทั้ง Front+Back</span></div><a href="https://www.borntodev.com" target="_blank">ดูรายละเอียด →</a></div></div>
 </div></div></div>
 
+<!-- MOBILE DEV ACCORDION -->
+<div class="acc c-mob rv" onclick="toggleAcc(this)">
+<div class="acc-header">
+<div class="acc-chibi"><svg class="chibi-svg" viewBox="0 0 80 100" width="48" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="30" r="18" fill="#f5d0a9"/><path d="M22 26Q25 12 40 10Q55 12 58 26Q55 19 48 16Q40 12 32 16Q25 19 22 26Z" fill="#4a148c"/><ellipse cx="34" cy="30" rx="2.8" ry="3.2" fill="#1a1a2e"/><ellipse cx="46" cy="30" rx="2.8" ry="3.2" fill="#1a1a2e"/><circle cx="35" cy="29" r="1.1" fill="#fff"/><circle cx="47" cy="29" r="1.1" fill="#fff"/><path d="M37 37Q40 40 43 37" stroke="#c4956a" stroke-width="1" fill="none" stroke-linecap="round"/><rect x="27" y="48" width="26" height="22" rx="5" fill="#e91e63"/><rect x="30" y="50" width="20" height="5" rx="2" fill="#f48fb1" opacity=".3"/><rect x="30" y="70" width="9" height="14" rx="4" fill="#880e4f"/><rect x="41" y="70" width="9" height="14" rx="4" fill="#880e4f"/><rect x="56" y="42" width="16" height="26" rx="3" fill="#37474f"/><rect x="58" y="44" width="12" height="18" rx="1.5" fill="#0d1525"/><rect x="59" y="45" width="10" height="15" rx="1" fill="#e91e63" opacity=".15"/><circle cx="64" cy="50" r="1.5" fill="#e91e63" opacity=".6"><animate attributeName="opacity" values=".3;.8;.3" dur="2s" repeatCount="indefinite"/></circle></svg></div>
+<div class="acc-info"><div class="acc-name">📱 Summoner — สาย Mobile Developer</div><div class="acc-sub">"ผู้สร้างแอปที่อยู่ในมือทุกคน" — เห็นผลเร็ว สนุก ทดสอบบนมือถือตัวเองได้ทันที</div></div>
+<div class="acc-arrow">▼</div>
+</div>
+<div class="acc-body"><div class="acc-inner">
+<div class="how-box" style="border-color:rgba(233,30,99,.15);background:linear-gradient(135deg,rgba(233,30,99,.04),rgba(233,30,99,.02))"><h4>📖 เริ่มเรียนยังไง?</h4><p>เริ่มจาก <b>Flutter (ของ Google)</b> เขียนครั้งเดียวใช้ได้ทั้ง iOS และ Android ไม่ต้องเลือก เขียนเสร็จ<b>กดรันดูบนมือถือตัวเองได้ทันที</b> ข้อดีคือ Flutter เป็น Open Source ใช้ฟรี และภาษา Dart ที่ใช้เรียนรู้ง่ายมาก ใช้เวลาประมาณ <b>3-4 เดือน</b></p></div>
+<div class="rpg-s"><span class="rpg-s-l">💰 เงินเดือนเริ่ม</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="68"></div></div><span class="rpg-s-v">30-50K</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📢 ต้องสื่อสาร</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="40"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🔥 ตลาดต้องการ</span><div class="rpg-bar"><div class="rpg-f f-dem" data-w="85"></div></div><span class="rpg-s-v">สูง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
+<div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="80"></div></div><span class="rpg-s-v">เร็ว</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="80"></div></div><span class="rpg-s-v">เหมาะมาก</span></div>
+<div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="40"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
+<div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Mobile Developer, Flutter Dev, React Native Dev</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">สตาร์ทอัพ, บริษัท Tech, Freelance, Remote</div></div></div>
+<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>สนุกที่สุดในทุกสาย</b> เพราะเห็นผลงานบนมือถือตัวเองทันที คุยกับ Designer กับ Backend Dev เป็นหลัก <b>ไม่ต้องนำเสนอ ไม่ต้องคุยกับลูกค้า</b> ความกดดันน้อยกว่า Full Stack เพราะโฟกัสแค่ฝั่ง Mobile ไม่ต้องดูแลทั้ง Front+Back</p></div>
+<h4 style="font-size:.75rem;font-weight:700;color:#e91e63;margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
+<div class="cs"><div class="cs-n">1</div><div><div class="cs-t">BorntoDev YouTube — Flutter เบื้องต้น</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span><span>📱 เห็นผลทันที</span></div><a href="https://www.youtube.com/@BorntoDev" target="_blank">ดูบน YouTube →</a></div></div>
+<div class="cs"><div class="cs-n">2</div><div><div class="cs-t">FutureSkill — สร้าง Mobile App ด้วย Flutter</div><div class="cs-m"><span>💰 1,290฿</span><span>🇹🇭 ไทย</span><span>📜 ได้เซอร์</span></div><a href="https://page.futureskill.co/flutter" target="_blank">ดูรายละเอียด →</a></div></div>
+<div class="cs"><div class="cs-n">3</div><div><div class="cs-t">SkillLane — พัฒนา Mobile App ด้วย Flutter 💰</div><div class="cs-m"><span>💰 เสียเงิน</span><span>🇹🇭 ไทย</span><span>📱 ครบ iOS+Android</span></div><a href="https://www.skilllane.com/courses/mobile-app-flutter" target="_blank">ดูรายละเอียด →</a></div></div>
+<div class="cs"><div class="cs-n">4</div><div><div class="cs-t">Skooldio — Flutter Pack Basic to Advanced 💰</div><div class="cs-m"><span>💰 เสียเงิน</span><span>🇹🇭 ไทย</span><span>🏆 ครบวงจร</span></div><a href="https://www.skooldio.com/bundles/flutter-pack-from-basic-to-advanced" target="_blank">ดูรายละเอียด →</a></div></div>
+</div></div></div>
+
+<!-- PRESSURE COMPARISON -->
+<div class="card rv" style="border-color:rgba(233,30,99,.1)">
+<h3>😰 ความกดดันแต่ละสาย — เรียงจากน้อยไปมาก</h3>
+<ul>
+<li><b>📊 Data — กดดันน้อย ⭐</b> ทำงานกับข้อมูล ไม่มี deadline เร่งด่วน แต่ต้องนำเสนอผลงาน</li>
+<li><b>☁️ Cloud — กดดันน้อย ⭐</b> ทำงานกับ Server เงียบๆ แต่ถ้าระบบล่มต้องแก้เร่งด่วน (ไม่บ่อย)</li>
+<li><b>📱 Mobile — กดดันน้อย-ปานกลาง</b> โฟกัสแค่ฝั่ง Mobile มี deadline แต่ไม่หลายทางพร้อมกัน</li>
+<li><b>🤖 AI — กดดันปานกลาง</b> ต้องทดลอง Model หลายรอบ บางทีผลลัพธ์ไม่ออกตามคาด</li>
+<li><b>🌐 Full Stack — กดดันปานกลาง-สูง</b> ดูแลทั้ง Front+Back มีหลายส่วนที่ต้องจัดการพร้อมกัน</li>
+</ul>
+<p style="margin-top:.5rem;font-size:.75rem;color:var(--txt3)">💡 สายที่เหมาะกับคนที่ไม่ชอบความกดดัน: <b>Data, Cloud, Mobile</b></p>
+</div>
+
 <!-- ROADMAP -->
 <div class="moti rv"><div class="big">🗺️</div><h3>เส้นทางที่แนะนำ — ค่อยๆ ไปทีละขั้น</h3><p style="text-align:left;max-width:560px">
 <b>🌱 เดือนที่ 1-2: เรียน Data + AI พื้นฐาน ไปพร้อมกัน</b><br>
@@ -645,6 +719,7 @@ Python, SQL, การวิเคราะห์ข้อมูล <b>เป็
 ▸ ชอบ <b>แก้ปัญหาเงียบๆ</b> → ไป <b>Cloud (Mage)</b><br>
 ▸ ชอบ <b>สร้างของใหม่ ทดลอง AI</b> → ไป <b>AI ลึกขึ้น (Assassin)</b><br>
 ▸ ชอบ <b>สร้างเว็บ เห็นผลทันที</b> → ไป <b>Full Stack (Ranger)</b><br>
+▸ ชอบ <b>สร้างแอปมือถือ</b> → ไป <b>Mobile Dev (Summoner)</b><br>
 ▸ ชอบ <b>วิเคราะห์ตัวเลข</b> → ไป <b>Data ลึกขึ้น (Knight)</b><br><br>
 <b>💡 อนาคต:</b> เมื่อทำงาน 2-3 ปีแล้ว สามารถต่อยอดไป <b>DevOps</b> หรือ <b>Security</b> ได้อีก<br><br>
 <b>เปลี่ยนได้เสมอ ไม่ต้องกลัวเลือกผิด</b>
