@@ -347,17 +347,25 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <p class="st-desc">ไม่ต้องเลือกตอนนี้ก็ได้ แค่ดูว่าแต่ละสายทำอะไร แล้วลองถามตัวเองว่า "อันไหนดูน่าลองดี?"</p>
 
 <!-- COMPARISON TABLE -->
-<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid var(--dim);margin-bottom:1.5rem" class="rv">
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid var(--dim);margin-bottom:.5rem" class="rv">
 <table class="cmp-table" style="margin-bottom:0;border:none">
-<thead><tr><th>สาย</th><th>เรียนง่าย</th><th>เงินเดือน</th><th>ได้งานเร็ว</th><th>คุยกับคน</th><th>กดดัน</th><th>เวลาเรียน</th><th>เหมาะกับเรา?</th></tr></thead>
+<thead><tr><th>สาย</th><th>เรียนง่าย</th><th>เงินเดือน</th><th>จำนวนงาน</th><th>กดดัน</th><th>คุยกับคน</th><th>เวลาเรียน</th><th>เหมาะกับเรา?</th></tr></thead>
 <tbody>
-<tr><td>📊 Data</td><td class="stars-r">★★★★★</td><td>22-40K</td><td class="stars-r">★★★</td><td>เยอะ</td><td style="color:#4caf50">น้อย</td><td>1-2 ด.</td><td class="fit-yes">✅ เริ่มต้นดี</td></tr>
-<tr class="cmp-highlight"><td>☁️ Cloud</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★★★★</td><td>น้อย</td><td style="color:#4caf50">น้อย</td><td>2-3 ด.</td><td class="fit-yes">✅✅ เหมาะมาก</td></tr>
-<tr><td>🤖 AI</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★</td><td>ปานกลาง</td><td style="color:var(--data)">ปานกลาง</td><td>2-3 ด.</td><td class="fit-ok">✅ ต่อยอดดี</td></tr>
-<tr><td>🌐 Full Stack</td><td class="stars-r">★★★</td><td>38-68K</td><td class="stars-r">★★★★</td><td>ปานกลาง</td><td style="color:var(--data)">ปานกลาง</td><td>3-4 ด.</td><td class="fit-ok">✅ เห็นผลเร็ว</td></tr>
-<tr><td>📱 Mobile</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★★★</td><td>น้อย</td><td style="color:#4caf50">น้อย</td><td>3-4 ด.</td><td class="fit-ok">✅ สนุก เห็นผลเร็ว</td></tr>
+<tr><td>📊 Data</td><td class="stars-r">★★★★★</td><td>22-40K</td><td class="stars-r">★★★★</td><td style="color:#4caf50">น้อย</td><td>เยอะ</td><td>1-2 ด.</td><td class="fit-yes">✅ เริ่มต้นดี</td></tr>
+<tr class="cmp-highlight"><td>☁️ Cloud</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★★★</td><td style="color:#4caf50">น้อย</td><td>น้อย</td><td>2-3 ด.</td><td class="fit-yes">✅✅ เหมาะมาก</td></tr>
+<tr><td>🤖 AI</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★</td><td style="color:var(--data)">ปานกลาง</td><td>ปานกลาง</td><td>2-3 ด.</td><td class="fit-ok">✅ ต่อยอดดี</td></tr>
+<tr><td>🌐 Full Stack</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★★★</td><td style="color:var(--data)">ปานกลาง-สูง</td><td>ปานกลาง</td><td>3-4 ด.</td><td class="fit-ok">✅ เห็นผลเร็ว</td></tr>
+<tr><td>📱 Mobile</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★</td><td style="color:#4caf50">น้อย</td><td>น้อย</td><td>3-4 ด.</td><td class="fit-ok">⚠️ งานน้อย</td></tr>
 </tbody>
 </table>
+</div>
+<div class="rv" style="font-size:.7rem;color:var(--txt3);margin-bottom:1.5rem;line-height:1.7;padding:0 .3rem">
+<b>📌 หมายเหตุจำนวนงาน:</b><br>
+▸ <b>Full Stack ★★★★★</b> — งานเยอะที่สุด ทุกบริษัทต้องมีเว็บ<br>
+▸ <b>Data ★★★★</b> — งานเยอะทุกอุตสาหกรรม แต่คนแข่งเยอะด้วย<br>
+▸ <b>Cloud ★★★★</b> — งานเยอะ + คนแข่งน้อย = ได้งานง่ายที่สุด<br>
+▸ <b>AI ★★★</b> — กำลังโตเร็ว แต่ตำแหน่งจูเนียร์ยังไม่เยอะมาก<br>
+▸ <b>Mobile ★★</b> — มีแค่บริษัทใหญ่ (ธนาคาร, LINE, Grab) บริษัทเล็กมักทำเว็บแทน
 </div>
 
 <!-- RPG CONCEPT with 3 Chibis + Ultimate Skill -->
@@ -566,6 +574,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="35"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Data Analyst, Data Engineer, Data Scientist</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">ธนาคาร, E-commerce, ทุกอุตสาหกรรม</div></div></div>
 <div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>ต้องคุยกับคนค่อนข้างเยอะ</b> นำเสนอผลวิเคราะห์ ถ้ายังไม่คล่อง <b>ทำ Dashboard ให้ข้อมูลพูดแทนเรา</b> ข้อดีคือ <b>ทุกบริษัทต้องการ</b></p></div>
+<div class="vibe" style="border-color:rgba(255,145,0,.1)"><h4>✅ ข้อดี vs ❌ ข้อเสีย</h4><p>✅ เรียนง่ายสุด เริ่มจาก Excel/SQL ทุกบริษัทต้องการ กดดันน้อย<br>❌ <b>ต้องนำเสนอผลงานให้ผู้บริหาร</b> คนแข่งเยอะเพราะเข้าถึงง่าย เงินเดือนเริ่มต้นต่ำกว่าสายอื่น</p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--data);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
 <div class="cs"><div class="cs-n">1</div><div><div class="cs-t">Chula MOOC Flexi — Data Analysis & Python</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 เซอร์จุฬาฯ</span><span>🇹🇭 ไทย</span></div><a href="https://cuneuron.chula.ac.th/cumooc-flexi" target="_blank">เข้าเรียน →</a></div></div>
 <div class="cs"><div class="cs-n">2</div><div><div class="cs-t">Thai MOOC — วิเคราะห์ข้อมูลและ ML</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 ได้เซอร์</span><span>🇹🇭 ไทย</span></div><a href="https://thaimooc.ac.th" target="_blank">เข้าเรียน →</a></div></div>
@@ -616,6 +625,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="30"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Cloud Engineer, DevOps, Solution Architect</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">บริษัท Tech, ธนาคาร, Remote ต่างประเทศ</div></div></div>
 <div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>คุยกับคนน้อยที่สุด</b> ทำงานกับ Terminal, Server เหมาะกับคนที่ <b>ชอบแก้ปัญหาเงียบๆ</b> มักจะ <b>ทำงาน Remote ได้</b> บริษัทต่างชาติจ้างคนไทยเยอะ</p></div>
+<div class="vibe" style="border-color:rgba(179,136,255,.1)"><h4>✅ ข้อดี vs ❌ ข้อเสีย</h4><p>✅ ได้งานง่ายสุด (คนแข่งน้อย+ตลาดขาดแคลน) ไม่ต้องคุยเยอะ Remote ได้<br>❌ ถ้า<b>ระบบล่มต้องแก้เร่งด่วน</b> (ไม่บ่อยแต่เครียดเมื่อเกิด) เนื้อหาส่วนใหญ่เป็นภาษาอังกฤษ</p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--cloud);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
 <div class="cs"><div class="cs-n">1</div><div><div class="cs-t">AWS Cloud Practitioner Essentials (ภาษาไทย)</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span><span>☁️ จาก AWS</span></div><a href="https://explore.skillbuilder.aws" target="_blank">เข้าเรียน →</a></div></div>
 <div class="cs"><div class="cs-n">2</div><div><div class="cs-t">Udemy — AWS Cloud ง่ายๆ</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span></div><a href="https://www.udemy.com/course/aws-cloud/" target="_blank">เข้าเรียน →</a></div></div>
@@ -641,6 +651,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">AI Engineer, ML Engineer, Prompt Engineer</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">บริษัท Tech, สตาร์ทอัพ, Remote</div></div></div>
 <div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p>ทำงาน <b>กับคอมเป็นหลัก</b> เขียนโค้ด ทดลอง AI Model ไม่ต้องคุยเยอะ บริษัทส่วนใหญ่ <b>ยืดหยุ่น ทำ Remote ได้</b></p></div>
+<div class="vibe" style="border-color:rgba(0,229,255,.1)"><h4>✅ ข้อดี vs ❌ ข้อเสีย</h4><p>✅ ร้อนแรง เงินเดือนโตเร็ว ใช้ได้กับทุกสาย<br>❌ ตำแหน่งจูเนียร์ยังไม่เยอะมาก บางบริษัท<b>ต้องการคนที่มี portfolio หรือจบปริญญาโท</b> ผลทดลอง AI บางทีไม่ออกตามคาด ต้องอดทน</p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--ai);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
 <div class="cs"><div class="cs-n">1</div><div><div class="cs-t">Chula MOOC Snap — Generative AI & ChatGPT</div><div class="cs-m"><span>🆓 ฟรี</span><span>⏱️ 1 ชม.</span><span>📜 ได้เซอร์</span><span>🇹🇭 ไทย</span></div><a href="https://mooc.chula.ac.th" target="_blank">เข้าเรียน →</a></div></div>
 <div class="cs"><div class="cs-n">2</div><div><div class="cs-t">Thai MOOC — ปลดล็อกพลัง AI ด้วย Python</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 ได้เซอร์</span><span>🇹🇭 ไทย</span></div><a href="https://thaimooc.ac.th" target="_blank">เข้าเรียน →</a></div></div>
@@ -657,7 +668,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 </div>
 <div class="acc-body"><div class="acc-inner">
 <div class="how-box" style="border-color:rgba(76,175,80,.15);background:linear-gradient(135deg,rgba(76,175,80,.04),rgba(76,175,80,.02))"><h4>📖 เริ่มเรียนยังไง?</h4><p>เริ่มจาก <b>HTML + CSS สร้างหน้าเว็บง่ายๆ</b> เขียนวันนี้เปิดดูผลได้ทันที ไม่ต้องมีพื้นฐานอะไรมาก่อน ค่อยต่อไป JavaScript แล้ว Backend — ข้อดีคือ<b>เห็นผลลัพธ์บนหน้าจอทันทีทุกครั้งที่เขียน</b> ทำให้สนุกและมีแรงเรียนต่อ ใช้เวลาประมาณ <b>3-4 เดือน</b></p></div>
-<div class="rpg-s"><span class="rpg-s-l">💰 เงินเดือนเริ่ม</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="80"></div></div><span class="rpg-s-v">38-68K ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">💰 เงินเดือนเริ่ม</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="68"></div></div><span class="rpg-s-v">25-45K</span></div>
 <div class="rpg-s"><span class="rpg-s-l">📢 ต้องสื่อสาร</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
 <div class="rpg-s"><span class="rpg-s-l">🔥 ตลาดต้องการ</span><div class="rpg-bar"><div class="rpg-f f-dem" data-w="88"></div></div><span class="rpg-s-v">สูง</span></div>
 <div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="55"></div></div><span class="rpg-s-v">ปานกลาง</span></div>
@@ -665,7 +676,8 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="65"></div></div><span class="rpg-s-v">เหมาะ</span></div>
 <div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="70"></div></div><span class="rpg-s-v">ปานกลาง-สูง</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Full Stack Developer, Frontend Dev, Backend Dev</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">ทุกบริษัท Tech, สตาร์ทอัพ, Remote ต่างประเทศ</div></div></div>
-<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p>ทำงาน<b>สร้างเว็บแอปที่ใช้งานจริง</b> ทั้งหน้าบ้าน (สิ่งที่ user เห็น) และหลังบ้าน (Server, Database) คุยกับทีมบ้าง แต่ไม่เยอะเท่า Data สามารถ<b>ทำงาน Remote ให้ต่างชาติได้</b> เงินเดือนอาจสูงถึง 2-4 เท่าของบริษัทไทย</p></div>
+<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p>ทำงาน<b>สร้างเว็บแอปที่ใช้งานจริง</b> ทั้งหน้าบ้านและหลังบ้าน คุยกับทีมบ้าง แต่ไม่เยอะเท่า Data สามารถ<b>ทำงาน Remote ได้</b> ถ้ามีประสบการณ์ 2-3 ปีสามารถรับงาน Remote ต่างชาติได้ซึ่งเงินเดือนจะสูงขึ้นมาก</p></div>
+<div class="vibe" style="border-color:rgba(76,175,80,.1)"><h4>✅ ข้อดี vs ❌ ข้อเสีย</h4><p>✅ งานเยอะที่สุด ทุกบริษัทต้องมีเว็บ เห็นผลเร็ว Remote ต่างชาติได้<br>❌ ต้องดูแลหลายส่วนพร้อมกัน (Front+Back+DB) <b>กดดันปานกลาง-สูง</b> ต้องเรียนรู้เยอะที่สุดในทุกสาย</p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--green);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
 <div class="cs"><div class="cs-n">1</div><div><div class="cs-t">BorntoDev YouTube — HTML/CSS/JS ฟรี</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span><span>👀 เห็นผลทันที</span></div><a href="https://www.youtube.com/@BorntoDev" target="_blank">ดูบน YouTube →</a></div></div>
 <div class="cs"><div class="cs-n">2</div><div><div class="cs-t">Chula MOOC Flexi — เขียนเว็บ & Python</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 เซอร์จุฬาฯ</span><span>🇹🇭 ไทย</span></div><a href="https://cuneuron.chula.ac.th/cumooc-flexi" target="_blank">เข้าเรียน →</a></div></div>
@@ -691,6 +703,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="40"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Mobile Developer, Flutter Dev, React Native Dev</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">สตาร์ทอัพ, บริษัท Tech, Freelance, Remote</div></div></div>
 <div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>สนุกที่สุดในทุกสาย</b> เพราะเห็นผลงานบนมือถือตัวเองทันที คุยกับ Designer กับ Backend Dev เป็นหลัก <b>ไม่ต้องนำเสนอ ไม่ต้องคุยกับลูกค้า</b> ความกดดันน้อยกว่า Full Stack เพราะโฟกัสแค่ฝั่ง Mobile ไม่ต้องดูแลทั้ง Front+Back</p></div>
+<div class="vibe" style="border-color:rgba(233,30,99,.1)"><h4>✅ ข้อดี vs ❌ ข้อเสีย</h4><p>✅ เห็นผลทันทีบนมือถือ สนุก ไม่ต้องคุยเยอะ กดดันน้อย<br>❌ <b>งานในไทยน้อยกว่าสายอื่นชัดเจน</b> มีแค่บริษัทใหญ่ สตาร์ทอัพเล็กมักทำเว็บแทน — เหมาะเป็น<b>ทักษะเสริม</b>มากกว่าสายหลัก</p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:#e91e63;margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
 <div class="cs"><div class="cs-n">1</div><div><div class="cs-t">BorntoDev YouTube — Flutter เบื้องต้น</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span><span>📱 เห็นผลทันที</span></div><a href="https://www.youtube.com/@BorntoDev" target="_blank">ดูบน YouTube →</a></div></div>
 <div class="cs"><div class="cs-n">2</div><div><div class="cs-t">FutureSkill — สร้าง Mobile App ด้วย Flutter</div><div class="cs-m"><span>💰 1,290฿</span><span>🇹🇭 ไทย</span><span>📜 ได้เซอร์</span></div><a href="https://page.futureskill.co/flutter" target="_blank">ดูรายละเอียด →</a></div></div>
