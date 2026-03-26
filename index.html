@@ -57,15 +57,16 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .scroll-fade,.scroll-arrow,.tabs-fade{display:none}
 /* Tabs */
 .tabs-wrap{position:sticky;top:46px;z-index:50}
-/* Scroll buttons */
-.scroll-btn{display:none;position:absolute;top:-1px;right:0;z-index:10;background:rgba(255,213,79,.12);color:var(--gold);border:1px solid rgba(255,213,79,.25);border-radius:0 14px 0 10px;padding:.25rem .6rem;font-size:.6rem;font-weight:700;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);transition:.2s;white-space:nowrap;letter-spacing:.3px}
-.scroll-btn:hover{background:rgba(255,213,79,.2)}
-.scroll-btn:active{transform:scale(.96)}
-.tab-scroll-btn{display:none;position:absolute;top:50%;right:4px;transform:translateY(-50%);z-index:52;background:rgba(255,213,79,.15);color:var(--gold);border:1px solid rgba(255,213,79,.25);border-radius:50%;width:28px;height:28px;font-size:.75rem;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);transition:.2s;padding:0;line-height:1}
-.tab-scroll-btn:active{transform:translateY(-50%) scale(.92)}
+/* Scroll buttons - above content, not overlapping */
+.scroll-btn-row{display:none;justify-content:flex-end;margin-bottom:.35rem}
+.scroll-btn{background:rgba(255,213,79,.1);color:var(--gold);border:1px solid rgba(255,213,79,.2);border-radius:8px;padding:.3rem .7rem;font-size:.62rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;white-space:nowrap}
+.scroll-btn:active{transform:scale(.95);background:rgba(255,213,79,.2)}
+.tab-scroll-row{display:none;justify-content:flex-end;padding:.4rem .5rem 0}
+.tab-scroll-btn{background:rgba(255,213,79,.1);color:var(--gold);border:1px solid rgba(255,213,79,.2);border-radius:8px;padding:.25rem .55rem;font-size:.58rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+.tab-scroll-btn:active{transform:scale(.95);background:rgba(255,213,79,.2)}
 @media(max-width:768px){
-.scroll-btn{display:block}
-.tab-scroll-btn{display:flex;align-items:center;justify-content:center}
+.scroll-btn-row{display:flex}
+.tab-scroll-row{display:flex}
 }
 .cmp-table{width:100%;border-collapse:separate;border-spacing:0;margin-bottom:1.5rem;font-size:.75rem;border-radius:14px;overflow:hidden;border:1px solid var(--dim)}
 .cmp-table th{background:rgba(255,213,79,.06);color:var(--gold);font-weight:700;padding:.55rem .4rem;text-align:center;font-size:.64rem;border-bottom:1px solid var(--dim)}
@@ -359,7 +360,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 
 <!-- TABS -->
 <div class="tabs-wrap" id="tabsWrap">
-<button class="tab-scroll-btn" id="tabScrollBtn" onclick="scrollTabs()">→</button>
+<div class="tab-scroll-row"><button class="tab-scroll-btn" id="tabScrollBtn" onclick="scrollTabs()">เลื่อน →</button></div>
 <div class="main-tabs" id="mainTabs">
 <button class="mt-btn active" onclick="showPanel('paths')">🗺️ สายอาชีพ</button>
 <button class="mt-btn" onclick="showPanel('intern')">🏢 ฝึกงาน</button>
@@ -376,8 +377,8 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <p class="st-desc">ไม่ต้องเลือกตอนนี้ก็ได้ แค่ดูว่าแต่ละสายทำอะไร แล้วลองถามตัวเองว่า "อันไหนดูน่าลองดี?"</p>
 
 <!-- COMPARISON TABLE (Sortable) -->
+<div class="scroll-btn-row"><button class="scroll-btn" id="tableScrollBtn" onclick="scrollTable()">เลื่อนดู →</button></div>
 <div class="scroll-wrap rv" id="tableWrap">
-<button class="scroll-btn" id="tableScrollBtn" onclick="scrollTable()">เลื่อนดู →</button>
 <div class="scroll-inner" id="scrollInner">
 <table class="cmp-table" id="sortTable" style="margin-bottom:0;border:none">
 <thead><tr>
