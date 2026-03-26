@@ -41,6 +41,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 @keyframes shine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
 .btn-g:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 35px rgba(255,213,79,.45)}
 .main-tabs{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center;padding:1.2rem 0;position:sticky;top:46px;z-index:50;background:rgba(10,13,26,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--dim)}
+.tabs-wrap{position:sticky;top:46px;z-index:50}
 .mt-btn{padding:.5rem .85rem;border:1px solid var(--dim);background:rgba(255,255,255,.02);color:var(--txt2);border-radius:9px;font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:.2s;font-family:inherit}
 .mt-btn:hover{border-color:rgba(255,213,79,.25);color:var(--txt)}
 .mt-btn.active{background:rgba(255,213,79,.08);border-color:rgba(255,213,79,.25);color:var(--gold)}
@@ -49,6 +50,21 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .st-badge{font-family:'Press Start 2P',monospace;font-size:.42rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem}
 .st-title{font-size:clamp(1.2rem,3.5vw,1.7rem);font-weight:800;margin-bottom:.5rem}
 .st-desc{color:var(--txt2);font-size:.88rem;max-width:640px;margin-bottom:1.5rem;line-height:1.8}
+/* SCROLL-AWARE TABLE WRAPPER */
+.scroll-wrap{position:relative;margin-bottom:.5rem}
+.scroll-inner{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;border-radius:14px;border:1px solid var(--dim)}
+.scroll-inner::-webkit-scrollbar{display:none}
+.scroll-fade,.scroll-arrow,.tabs-fade{display:none}
+/* Tabs */
+.tabs-wrap{position:sticky;top:46px;z-index:50}
+/* MOBILE: scroll hints via ::after pseudo-elements - works 100% */
+@media(max-width:768px){
+.scroll-wrap::after{content:'👉 เลื่อนดู';position:absolute;top:50%;right:4px;transform:translateY(-50%);z-index:10;font-size:.62rem;color:var(--gold);background:rgba(10,13,26,.92);padding:.25rem .5rem;border-radius:20px;pointer-events:none;animation:hintPulse 1.2s ease-in-out infinite;border:1px solid rgba(255,213,79,.25);white-space:nowrap}
+.scroll-wrap.scrolled::after{display:none}
+.tabs-wrap::after{content:'→';position:absolute;top:50%;right:2px;transform:translateY(-50%);z-index:52;font-size:.9rem;color:var(--gold);pointer-events:none;animation:hintPulse 1.2s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(255,213,79,.5));background:rgba(10,13,26,.8);width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.tabs-wrap.scrolled-tabs::after{display:none}
+}
+@keyframes hintPulse{0%,100%{transform:translateY(-50%) translateX(0);opacity:.7}50%{transform:translateY(-50%) translateX(-6px);opacity:1}}
 .cmp-table{width:100%;border-collapse:separate;border-spacing:0;margin-bottom:1.5rem;font-size:.75rem;border-radius:14px;overflow:hidden;border:1px solid var(--dim)}
 .cmp-table th{background:rgba(255,213,79,.06);color:var(--gold);font-weight:700;padding:.55rem .4rem;text-align:center;font-size:.64rem;border-bottom:1px solid var(--dim)}
 .cmp-table th:first-child{text-align:left;padding-left:.8rem}
@@ -58,6 +74,13 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .cmp-table tr:hover{background:rgba(255,255,255,.02)}
 .cmp-table .stars-r{color:var(--gold);letter-spacing:1px;font-size:.68rem}
 .cmp-table .fit-yes{color:var(--green);font-weight:800}.cmp-table .fit-no{color:#ff5252;font-weight:800}.cmp-table .fit-ok{color:var(--ai);font-weight:700}
+.cmp-table th{cursor:pointer;user-select:none;position:relative}
+.sort-arrow{font-size:.55rem;opacity:.4;margin-left:.15rem}
+.cmp-table th.sort-asc .sort-arrow{opacity:1}
+.cmp-table th.sort-desc .sort-arrow{opacity:1}
+.cmp-table th.sort-asc .sort-arrow::after{content:'▲'}
+.cmp-table th.sort-desc .sort-arrow::after{content:'▼'}
+.cmp-table th.sort-asc .sort-arrow,.cmp-table th.sort-desc .sort-arrow{color:var(--gold)}
 .cmp-highlight{background:rgba(179,136,255,.06)!important}
 /* RPG CONCEPT BOX */
 .rpg-concept{text-align:center;padding:1.8rem 1.2rem;border-radius:16px;border:1px solid rgba(255,213,79,.12);background:linear-gradient(135deg,rgba(255,213,79,.04),rgba(179,136,255,.03));margin-bottom:1.5rem}
@@ -87,6 +110,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .acc.c-ai .acc-name{color:var(--ai)}.acc.c-ai .vibe h4,.acc.c-ai .cs a,.acc.c-ai .how-box h4{color:var(--ai)}.acc.c-ai .cs-n{background:var(--ai)}
 .acc.c-fs .acc-name{color:var(--green)}.acc.c-fs .vibe h4,.acc.c-fs .cs a,.acc.c-fs .how-box h4{color:var(--green)}.acc.c-fs .cs-n{background:var(--green)}
 .acc.c-mob .acc-name{color:#e91e63}.acc.c-mob .vibe h4,.acc.c-mob .cs a,.acc.c-mob .how-box h4{color:#e91e63}.acc.c-mob .cs-n{background:#e91e63}
+.acc.c-qa .acc-name{color:#00acc1}.acc.c-qa .vibe h4,.acc.c-qa .cs a,.acc.c-qa .how-box h4{color:#00acc1}.acc.c-qa .cs-n{background:#00acc1}
 .rpg-s{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
 .rpg-s-l{font-size:.67rem;font-weight:700;color:var(--txt2);min-width:110px;white-space:nowrap}
 .rpg-bar{flex:1;height:11px;background:rgba(255,255,255,.04);border-radius:6px;overflow:hidden;min-width:60px;border:1px solid rgba(255,255,255,.03)}
@@ -145,11 +169,11 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .jd{grid-template-columns:1fr}
 .rpg-s{flex-wrap:wrap}.rpg-s-l{min-width:auto;width:100%;font-size:.75rem;margin-bottom:.1rem}.rpg-bar{width:100%}.rpg-s-v{width:100%;text-align:left;font-size:.7rem;margin-top:.1rem}
 /* TABS - scroll horizontal, no overflow */
-.main-tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;padding:.7rem .5rem;gap:.3rem;scrollbar-width:none;-ms-overflow-style:none}
+.main-tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;padding:.7rem .5rem;gap:.3rem;scrollbar-width:none;-ms-overflow-style:none;position:static}
 .main-tabs::-webkit-scrollbar{display:none}
 .mt-btn{padding:.5rem .7rem;font-size:.72rem;flex-shrink:0}
 /* TABLE - horizontal scroll wrapper */
-.cmp-table{font-size:.68rem;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}
+.cmp-table{font-size:.68rem;white-space:nowrap}
 .cmp-table th,.cmp-table td{padding:.4rem .35rem;white-space:nowrap}
 .cmp-table th:first-child,.cmp-table td:first-child{position:sticky;left:0;background:var(--panel);z-index:2}
 .cmp-table th:first-child{background:rgba(18,22,42,.98)}
@@ -332,6 +356,8 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 </section>
 
 <!-- TABS -->
+<div class="tabs-wrap" id="tabsWrap">
+<div class="tabs-fade" id="tabsFade"></div>
 <div class="main-tabs" id="mainTabs">
 <button class="mt-btn active" onclick="showPanel('paths')">🗺️ สายอาชีพ</button>
 <button class="mt-btn" onclick="showPanel('intern')">🏢 ฝึกงาน</button>
@@ -339,34 +365,63 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <button class="mt-btn" onclick="showPanel('comm')">🎤 สื่อสาร</button>
 <button class="mt-btn" onclick="showPanel('tips')">💡 เคล็ดลับ</button>
 </div>
+</div>
 
 <!-- ====== PANEL: PATHS ====== -->
 <div class="main-panel active" id="p-paths">
 <div class="st-badge">🗺️ EXPLORE YOUR PATH</div>
-<div class="st-title">สำรวจ 5 สายอาชีพ</div>
+<div class="st-title">สำรวจ 6 สายอาชีพ</div>
 <p class="st-desc">ไม่ต้องเลือกตอนนี้ก็ได้ แค่ดูว่าแต่ละสายทำอะไร แล้วลองถามตัวเองว่า "อันไหนดูน่าลองดี?"</p>
 
-<!-- COMPARISON TABLE -->
-<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid var(--dim);margin-bottom:.5rem" class="rv">
-<table class="cmp-table" style="margin-bottom:0;border:none">
-<thead><tr><th>สาย</th><th>เรียนง่าย</th><th>เงินเดือน</th><th>จำนวนงาน</th><th>กดดัน</th><th>คุยกับคน</th><th>เวลาเรียน</th><th>เหมาะกับเรา?</th></tr></thead>
+<!-- COMPARISON TABLE (Sortable + Scroll Hint) -->
+<div class="scroll-wrap rv" id="tableWrap">
+<div class="scroll-fade" id="tableFade"></div>
+<div class="scroll-arrow" id="scrollArrow">👉</div>
+<div class="scroll-inner" id="scrollInner">
+<table class="cmp-table" id="sortTable" style="margin-bottom:0;border:none">
+<thead><tr>
+<th onclick="sortT(0)" style="cursor:pointer">สาย <span class="sort-arrow">⇅</span></th>
+<th onclick="sortT(1)" style="cursor:pointer">เรียนง่าย <span class="sort-arrow">⇅</span></th>
+<th onclick="sortT(2)" style="cursor:pointer">เงินเดือน <span class="sort-arrow">⇅</span></th>
+<th onclick="sortT(3)" style="cursor:pointer">จำนวนงาน <span class="sort-arrow">⇅</span></th>
+<th onclick="sortT(4)" style="cursor:pointer">รับจบใหม่ <span class="sort-arrow">⇅</span></th>
+<th onclick="sortT(5)" style="cursor:pointer">กดดัน <span class="sort-arrow">⇅</span></th>
+<th onclick="sortT(6)" style="cursor:pointer">คุยกับคน <span class="sort-arrow">⇅</span></th>
+<th onclick="sortT(7)" style="cursor:pointer">เวลาเรียน <span class="sort-arrow">⇅</span></th>
+</tr></thead>
 <tbody>
-<tr><td>📊 Data</td><td class="stars-r">★★★★★</td><td>22-40K</td><td class="stars-r">★★★★</td><td style="color:#4caf50">น้อย</td><td>เยอะ</td><td>1-2 ด.</td><td class="fit-yes">✅ เริ่มต้นดี</td></tr>
-<tr class="cmp-highlight"><td>☁️ Cloud</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★★★</td><td style="color:#4caf50">น้อย</td><td>น้อย</td><td>2-3 ด.</td><td class="fit-yes">✅✅ เหมาะมาก</td></tr>
-<tr><td>🤖 AI</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★</td><td style="color:var(--data)">ปานกลาง</td><td>ปานกลาง</td><td>2-3 ด.</td><td class="fit-ok">✅ ต่อยอดดี</td></tr>
-<tr><td>🌐 Full Stack</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★★★</td><td style="color:var(--data)">ปานกลาง-สูง</td><td>ปานกลาง</td><td>3-4 ด.</td><td class="fit-ok">✅ เห็นผลเร็ว</td></tr>
-<tr><td>📱 Mobile</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★</td><td style="color:#4caf50">น้อย</td><td>น้อย</td><td>3-4 ด.</td><td class="fit-ok">⚠️ งานน้อย</td></tr>
+<tr data-sort="1,5,22,4,4,1,3,1"><td>📊 Data</td><td class="stars-r">★★★★★</td><td>22-40K</td><td class="stars-r">★★★★</td><td class="fit-yes">✅ สูง</td><td style="color:#4caf50">น้อย</td><td>เยอะ</td><td>1-2 ด.</td></tr>
+<tr data-sort="2,3,30,4,4,1,1,2"><td>☁️ Cloud</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★★★</td><td class="fit-yes">✅ สูง</td><td style="color:#4caf50">น้อย*</td><td>น้อย</td><td>2-3 ด.</td></tr>
+<tr data-sort="3,3,25,3,2,2,2,2"><td>🤖 AI</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★</td><td style="color:var(--data)">⚠️ ปานกลาง</td><td style="color:var(--data)">ปานกลาง</td><td>ปานกลาง</td><td>2-3 ด.</td></tr>
+<tr data-sort="4,3,25,5,4,3,2,3"><td>🌐 Full Stack</td><td class="stars-r">★★★</td><td>25-45K</td><td class="stars-r">★★★★★</td><td class="fit-yes">✅ สูง</td><td style="color:var(--data)">ปานกลาง-สูง</td><td>ปานกลาง</td><td>3-4 ด.</td></tr>
+<tr data-sort="5,3,30,2,2,1,1,3"><td>📱 Mobile</td><td class="stars-r">★★★</td><td>30-50K</td><td class="stars-r">★★</td><td style="color:var(--data)">⚠️ ปานกลาง</td><td style="color:#4caf50">น้อย</td><td>น้อย</td><td>3-4 ด.</td></tr>
+<tr data-sort="6,5,20,4,5,1,1,1"><td>🔍 Tester</td><td class="stars-r">★★★★★</td><td>20-35K</td><td class="stars-r">★★★★</td><td class="fit-yes">✅✅ สูงมาก</td><td style="color:#4caf50">น้อย</td><td>น้อย</td><td>1-2 ด.</td></tr>
 </tbody>
 </table>
 </div>
-<div class="rv" style="font-size:.7rem;color:var(--txt3);margin-bottom:1.5rem;line-height:1.7;padding:0 .3rem">
-<b>📌 หมายเหตุจำนวนงาน:</b><br>
-▸ <b>Full Stack ★★★★★</b> — งานเยอะที่สุด ทุกบริษัทต้องมีเว็บ<br>
-▸ <b>Data ★★★★</b> — งานเยอะทุกอุตสาหกรรม แต่คนแข่งเยอะด้วย<br>
-▸ <b>Cloud ★★★★</b> — งานเยอะ + คนแข่งน้อย = ได้งานง่ายที่สุด<br>
-▸ <b>AI ★★★</b> — กำลังโตเร็ว แต่ตำแหน่งจูเนียร์ยังไม่เยอะมาก<br>
-▸ <b>Mobile ★★</b> — มีแค่บริษัทใหญ่ (ธนาคาร, LINE, Grab) บริษัทเล็กมักทำเว็บแทน
 </div>
+<p class="rv" style="font-size:.6rem;color:var(--txt3);margin-bottom:.8rem;text-align:center">💡 กดหัวคอลัมน์เพื่อเรียง · <span id="scrollTip">👉 เลื่อนซ้าย-ขวาเพื่อดูเพิ่ม</span></p>
+
+<!-- NOTE BOX 1: จำนวนงาน -->
+<div class="rv" style="background:linear-gradient(135deg,rgba(66,165,245,.06),rgba(66,165,245,.02));border:1px solid rgba(66,165,245,.15);border-radius:12px;padding:.8rem 1rem;margin-bottom:.6rem;line-height:1.7">
+<div style="font-size:.72rem;font-weight:800;color:var(--blue);margin-bottom:.35rem">📊 หมายเหตุจำนวนงาน</div>
+<div style="font-size:.68rem;color:var(--txt2)">
+▸ <b>Full Stack ★★★★★</b> — งานเยอะที่สุด ทุกบริษัทต้องมีเว็บ<br>
+▸ <b>Data / Tester ★★★★</b> — งานเยอะ (Tester: แอป 1 ตัวมีงานเทสมหาศาล)<br>
+▸ <b>Cloud ★★★★</b> — งานเยอะ + คนแข่งน้อย = ได้งานง่ายที่สุด<br>
+▸ <b>AI ★★★</b> — กำลังโต แต่จูเนียร์ยังไม่เยอะ<br>
+▸ <b>Mobile ★★</b> — มีแค่บริษัทใหญ่ บริษัทเล็กทำเว็บแทน
+</div></div>
+
+<!-- NOTE BOX 2: รับจบใหม่ -->
+<div class="rv" style="background:linear-gradient(135deg,rgba(76,175,80,.06),rgba(76,175,80,.02));border:1px solid rgba(76,175,80,.15);border-radius:12px;padding:.8rem 1rem;margin-bottom:1.5rem;line-height:1.7">
+<div style="font-size:.72rem;font-weight:800;color:var(--green);margin-bottom:.35rem">🎓 หมายเหตุรับจบใหม่</div>
+<div style="font-size:.68rem;color:var(--txt2)">
+▸ <b>Tester ✅✅ สูงมาก</b> — เปิดรับ Entry Level เยอะที่สุด ไม่ต้องเขียนโค้ดเก่ง<br>
+▸ <b>Data / Cloud / Full Stack ✅ สูง</b> — มี Junior เยอะ Cloud ขาดแคลนยินดีสอนงาน<br>
+▸ <b>AI / Mobile ⚠️ ปานกลาง</b> — AI ต้องการ portfolio / Mobile มีแค่บริษัทใหญ่<br>
+▸ *Cloud กดดันน้อย* = ปกติเบามาก แต่ระบบล่มต้องแก้เร่ง (ไม่บ่อย)
+</div></div>
 
 <!-- RPG CONCEPT with 3 Chibis + Ultimate Skill -->
 <div class="rpg-concept rv">
@@ -528,6 +583,35 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="label" style="color:#e91e63">📱 Summoner<br><span class="sublabel">สาย Mobile Dev</span></div>
 </div>
 
+<!-- SCOUT (Tester) -->
+<div class="rpg-char">
+<svg class="chibi-svg" viewBox="0 0 80 95" width="65" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="26" r="20" fill="#f5d0a9"/>
+<path d="M20 22Q23 8 40 6Q57 8 60 22Q58 15 50 11Q40 6 30 11Q22 15 20 22Z" fill="#006064"/>
+<ellipse cx="33" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><ellipse cx="47" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/>
+<circle cx="34.2" cy="25" r="1.2" fill="#fff"/><circle cx="48.2" cy="25" r="1.2" fill="#fff"/>
+<path d="M36 33Q40 36 44 33" stroke="#c4956a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+<ellipse cx="27" cy="30" rx="3.5" ry="2" fill="#ffb3b3" opacity=".3"/><ellipse cx="53" cy="30" rx="3.5" ry="2" fill="#ffb3b3" opacity=".3"/>
+<rect x="27" y="46" width="26" height="22" rx="5" fill="#00acc1"/>
+<rect x="30" y="48" width="20" height="5" rx="2" fill="#80deea" opacity=".4"/>
+<rect x="30" y="68" width="9" height="14" rx="4" fill="#006064"/>
+<rect x="41" y="68" width="9" height="14" rx="4" fill="#006064"/>
+<rect x="28" y="78" width="13" height="7" rx="3" fill="#00838f"/>
+<rect x="39" y="78" width="13" height="7" rx="3" fill="#00838f"/>
+<!-- Magnifying glass -->
+<circle cx="62" cy="35" r="12" stroke="#00acc1" stroke-width="3" fill="none"/>
+<circle cx="62" cy="35" r="8" fill="rgba(0,172,193,.1)"/>
+<line x1="71" y1="44" x2="78" y2="51" stroke="#00acc1" stroke-width="3.5" stroke-linecap="round"/>
+<!-- Clipboard -->
+<rect x="4" y="40" width="16" height="22" rx="2" fill="#fff3e0"/>
+<rect x="8" y="38" width="8" height="4" rx="2" fill="#006064"/>
+<rect x="7" y="46" width="10" height="2" rx="1" fill="#00acc1" opacity=".4"/>
+<rect x="7" y="50" width="8" height="2" rx="1" fill="#00acc1" opacity=".4"/>
+<rect x="7" y="54" width="10" height="2" rx="1" fill="#00acc1" opacity=".4"/>
+</svg>
+<div class="label" style="color:#00acc1">🔍 Scout<br><span class="sublabel">สาย Tester/QA</span></div>
+</div>
+
 <!-- ULTIMATE SKILL -->
 <div class="rpg-char" style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end">
 <div style="font-size:.5rem;color:var(--gold);font-weight:700;margin-bottom:.4rem;text-align:center">ULTIMATE<br>SKILL</div>
@@ -547,7 +631,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 </div>
 <h3>🎮 คิดแบบเกม RPG</h3>
 <p>
-<b>Data, Cloud, AI, Full Stack, Mobile</b> = สายอาชีพ เหมือนเลือก <b>Class</b><br>
+<b>Data, Cloud, AI, Full Stack, Mobile, Tester</b> = สายอาชีพ เหมือนเลือก <b>Class</b><br>
 <b>AI Mastery</b> = Ultimate Skill ที่ <b>ทุก Class ปลดล็อกได้</b><br><br>
 ไม่ต้องเลือกระหว่าง AI กับ Cloud — <b>เรียนไปด้วยกันได้</b><br>
 คอร์สที่แนะนำสอน AI รวมอยู่แล้วตั้งแต่ขั้นแรก
@@ -560,7 +644,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="acc c-data rv" onclick="toggleAcc(this)">
 <div class="acc-header">
 <div class="acc-chibi"><svg class="chibi-svg" viewBox="0 0 80 95" width="48" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="26" r="20" fill="#f5d0a9"/><path d="M20 22Q23 8 40 6Q57 8 60 22Q58 15 50 11Q40 6 30 11Q22 15 20 22Z" fill="#8B4513"/><ellipse cx="33" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><ellipse cx="47" cy="26" rx="3" ry="3.5" fill="#1a1a2e"/><circle cx="34.2" cy="25" r="1.2" fill="#fff"/><circle cx="48.2" cy="25" r="1.2" fill="#fff"/><path d="M36 33Q40 36 44 33" stroke="#c4956a" stroke-width="1.2" fill="none" stroke-linecap="round"/><rect x="27" y="46" width="26" height="22" rx="5" fill="#ff9100"/><circle cx="40" cy="51" r="2" fill="var(--gold)" opacity=".6"/><ellipse cx="24" cy="50" rx="6" ry="5" fill="#e65100"/><ellipse cx="56" cy="50" rx="6" ry="5" fill="#e65100"/><rect x="30" y="68" width="9" height="14" rx="4" fill="#bf360c"/><rect x="41" y="68" width="9" height="14" rx="4" fill="#bf360c"/><ellipse cx="14" cy="58" rx="10" ry="13" fill="#455a64"/><circle cx="14" cy="56" r="3" fill="var(--gold)" opacity=".5"/></svg></div>
-<div class="acc-info"><div class="acc-name">📊 Knight — สาย Data</div><div class="acc-sub">"ผู้เปลี่ยนข้อมูลเป็นพลัง" — เรียนง่ายสุด เข้าถึงง่าย</div></div>
+<div class="acc-info"><div class="acc-name">📊 Knight — สาย Data / SQL</div><div class="acc-sub">"บรรณารักษ์ข้อมูล" — เรียนง่ายสุด งาน Deep Work จดจ่อกับข้อมูล มีโครงสร้างชัดเจน</div></div>
 <div class="acc-arrow">▼</div>
 </div>
 <div class="acc-body"><div class="acc-inner">
@@ -573,7 +657,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="50"></div></div><span class="rpg-s-v">ต้องคุยเยอะ</span></div>
 <div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="35"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Data Analyst, Data Engineer, Data Scientist</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">ธนาคาร, E-commerce, ทุกอุตสาหกรรม</div></div></div>
-<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>ต้องคุยกับคนค่อนข้างเยอะ</b> นำเสนอผลวิเคราะห์ ถ้ายังไม่คล่อง <b>ทำ Dashboard ให้ข้อมูลพูดแทนเรา</b> ข้อดีคือ <b>ทุกบริษัทต้องการ</b></p></div>
+<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p>เปรียบเหมือน <b>"บรรณารักษ์ข้อมูล"</b> ไม่ใช่แค่พิมพ์ข้อมูล แต่คือการจัดระเบียบ ดึง และวิเคราะห์ข้อมูลให้เป็นประโยชน์ เป็นงาน <b>Deep Work ที่ใช้สมาธิจดจ่อสูง</b> ทำงานกับข้อมูลที่มีโครงสร้างและ logic ชัดเจน — เหมาะกับคนที่ชอบทำงานเป็นระบบ สาย Data Analyst ต้องนำเสนอบ้าง แต่สาย Data Processor/SQL <b>แทบไม่ต้องคุยกับใคร</b> ทำงานหลังบ้านอย่างเดียว</p></div>
 <div class="vibe" style="border-color:rgba(255,145,0,.1)"><h4>✅ ข้อดี vs ❌ ข้อเสีย</h4><p>✅ เรียนง่ายสุด เริ่มจาก Excel/SQL ทุกบริษัทต้องการ กดดันน้อย<br>❌ <b>ต้องนำเสนอผลงานให้ผู้บริหาร</b> คนแข่งเยอะเพราะเข้าถึงง่าย เงินเดือนเริ่มต้นต่ำกว่าสายอื่น</p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--data);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
 <div class="cs"><div class="cs-n">1</div><div><div class="cs-t">Chula MOOC Flexi — Data Analysis & Python</div><div class="cs-m"><span>🆓 ฟรี</span><span>📜 เซอร์จุฬาฯ</span><span>🇹🇭 ไทย</span></div><a href="https://cuneuron.chula.ac.th/cumooc-flexi" target="_blank">เข้าเรียน →</a></div></div>
@@ -611,7 +695,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <circle cx="65.5" cy="26" r="3.5" fill="#e1bee7" opacity=".8"/>
 <circle cx="65.5" cy="26" r="2" fill="#fff" opacity=".4"><animate attributeName="opacity" values=".2;.7;.2" dur="2s" repeatCount="indefinite"/></circle>
 </svg></div>
-<div class="acc-info"><div class="acc-name">☁️ Mage — สาย Cloud / DevOps</div><div class="acc-sub">"ผู้สร้างระบบหลังบ้าน" — ขาดแคลนสุด ได้งานเร็วสุด ไม่ต้องคุยเยอะ ⭐</div></div>
+<div class="acc-info"><div class="acc-name">☁️ Mage — สาย Cloud / DevOps</div><div class="acc-sub">"ผู้เฝ้าระวังระบบ" — ขาดแคลนสุด ไม่ต้องคุยเยอะ เวลาปกติงานเบามาก ⭐</div></div>
 <div class="acc-arrow">▼</div>
 </div>
 <div class="acc-body"><div class="acc-inner">
@@ -624,7 +708,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="95"></div></div><span class="rpg-s-v">เหมาะมาก ⭐</span></div>
 <div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="30"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
 <div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">Cloud Engineer, DevOps, Solution Architect</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">บริษัท Tech, ธนาคาร, Remote ต่างประเทศ</div></div></div>
-<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>คุยกับคนน้อยที่สุด</b> ทำงานกับ Terminal, Server เหมาะกับคนที่ <b>ชอบแก้ปัญหาเงียบๆ</b> มักจะ <b>ทำงาน Remote ได้</b> บริษัทต่างชาติจ้างคนไทยเยอะ</p></div>
+<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p>งานจริงๆ คือ <b>"ผู้เฝ้าระวัง" (Monitoring)</b> ดู Dashboard ตั้ง Alert เช็คว่าระบบทำงานปกติไหม — เวลาปกติ<b>งานเบาและสงบมาก</b> เหมาะกับคนเก็บตัว แต่ถ้าระบบล่มต้องแก้เร่งด่วน (ไม่บ่อยแต่เครียดเมื่อเกิด) อาจมี on-call ถูกเรียกนอกเวลาบ้าง บริษัทรับจบใหม่ที่มี cert พื้นฐานมาช่วยแบ่งเบางาน Routine <b>Remote ได้ บริษัทต่างชาติจ้างคนไทยเยอะ</b></p></div>
 <div class="vibe" style="border-color:rgba(179,136,255,.1)"><h4>✅ ข้อดี vs ❌ ข้อเสีย</h4><p>✅ ได้งานง่ายสุด (คนแข่งน้อย+ตลาดขาดแคลน) ไม่ต้องคุยเยอะ Remote ได้<br>❌ ถ้า<b>ระบบล่มต้องแก้เร่งด่วน</b> (ไม่บ่อยแต่เครียดเมื่อเกิด) เนื้อหาส่วนใหญ่เป็นภาษาอังกฤษ</p></div>
 <h4 style="font-size:.75rem;font-weight:700;color:var(--cloud);margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
 <div class="cs"><div class="cs-n">1</div><div><div class="cs-t">AWS Cloud Practitioner Essentials (ภาษาไทย)</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span><span>☁️ จาก AWS</span></div><a href="https://explore.skillbuilder.aws" target="_blank">เข้าเรียน →</a></div></div>
@@ -711,17 +795,45 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="cs"><div class="cs-n">4</div><div><div class="cs-t">Skooldio — Flutter Pack Basic to Advanced 💰</div><div class="cs-m"><span>💰 เสียเงิน</span><span>🇹🇭 ไทย</span><span>🏆 ครบวงจร</span></div><a href="https://www.skooldio.com/bundles/flutter-pack-from-basic-to-advanced" target="_blank">ดูรายละเอียด →</a></div></div>
 </div></div></div>
 
+<!-- SOFTWARE TESTER (QA) ACCORDION -->
+<div class="acc c-qa rv" onclick="toggleAcc(this)">
+<div class="acc-header">
+<div class="acc-chibi"><svg class="chibi-svg" viewBox="0 0 80 100" width="48" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="30" r="18" fill="#f5d0a9"/><path d="M22 26Q25 12 40 10Q55 12 58 26Q55 19 48 16Q40 12 32 16Q25 19 22 26Z" fill="#006064"/><ellipse cx="34" cy="30" rx="2.8" ry="3.2" fill="#1a1a2e"/><ellipse cx="46" cy="30" rx="2.8" ry="3.2" fill="#1a1a2e"/><circle cx="35" cy="29" r="1.1" fill="#fff"/><circle cx="47" cy="29" r="1.1" fill="#fff"/><path d="M37 37Q40 40 43 37" stroke="#c4956a" stroke-width="1" fill="none" stroke-linecap="round"/><rect x="27" y="48" width="26" height="22" rx="5" fill="#00acc1"/><rect x="30" y="50" width="20" height="5" rx="2" fill="#80deea" opacity=".3"/><rect x="30" y="70" width="9" height="14" rx="4" fill="#006064"/><rect x="41" y="70" width="9" height="14" rx="4" fill="#006064"/><circle cx="62" cy="38" r="10" stroke="#00acc1" stroke-width="2.5" fill="none"/><line x1="69" y1="45" x2="76" y2="52" stroke="#00acc1" stroke-width="3" stroke-linecap="round"/></svg></div>
+<div class="acc-info"><div class="acc-name">🔍 Scout — สาย Software Tester (QA)</div><div class="acc-sub">"ผู้ตรวจสอบคุณภาพ" — เข้าสู่วงการ IT ง่ายที่สุด ไม่ต้องเขียนโค้ดเก่ง รับจบใหม่เยอะที่สุด ⭐</div></div>
+<div class="acc-arrow">▼</div>
+</div>
+<div class="acc-body"><div class="acc-inner">
+<div class="how-box" style="border-color:rgba(0,172,193,.15);background:linear-gradient(135deg,rgba(0,172,193,.04),rgba(0,172,193,.02))"><h4>📖 เริ่มเรียนยังไง?</h4><p>เริ่มจาก <b>Manual Test ไม่ต้องเขียนโค้ด</b> — ทดสอบว่าโปรแกรมทำงานถูกไหม เขียน Test Case ใน Excel รายงานบัค ใช้ <b>Excel, SQL, Postman</b> ที่เรียนรู้ง่าย ต่อยอดไป Automation Test ทีหลังได้ ใช้เวลา <b>1-2 เดือน</b> ก็เริ่มสมัครงานได้</p></div>
+<div class="rpg-s"><span class="rpg-s-l">💰 เงินเดือนเริ่ม</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="50"></div></div><span class="rpg-s-v">20-35K</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📢 ต้องสื่อสาร</span><div class="rpg-bar"><div class="rpg-f f-com" data-w="35"></div></div><span class="rpg-s-v">น้อย ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🔥 ตลาดต้องการ</span><div class="rpg-bar"><div class="rpg-f f-dem" data-w="90"></div></div><span class="rpg-s-v">สูงมาก (ขาดแคลน)</span></div>
+<div class="rpg-s"><span class="rpg-s-l">📖 เรียนง่าย</span><div class="rpg-bar"><div class="rpg-f f-easy" data-w="92"></div></div><span class="rpg-s-v">ง่ายมาก ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">⚡ ได้งานเร็ว</span><div class="rpg-bar"><div class="rpg-f f-fast" data-w="90"></div></div><span class="rpg-s-v">เร็วมาก ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">🧑 เหมาะกับบุคลิก</span><div class="rpg-bar"><div class="rpg-f f-fit" data-w="90"></div></div><span class="rpg-s-v">เหมาะมาก ⭐</span></div>
+<div class="rpg-s"><span class="rpg-s-l">😰 ความกดดัน</span><div class="rpg-bar"><div class="rpg-f f-sal" data-w="25"></div></div><span class="rpg-s-v">น้อยมาก ⭐</span></div>
+<div class="jd"><div class="jd-item"><div class="lbl">ตำแหน่ง</div><div class="val">QA Tester, QA Engineer, Automation Tester</div></div><div class="jd-item"><div class="lbl">ทำงานที่</div><div class="val">ทุกบริษัท Tech, ธนาคาร, Remote ได้</div></div></div>
+<div class="vibe"><h4>🎮 บรรยากาศการทำงาน</h4><p><b>"ผู้ตรวจสอบ"</b> ว่าซอฟต์แวร์ทำงานถูกต้อง ไม่ต้องสร้างระบบเอง แค่ทดสอบแล้วรายงาน — <b>แอป 1 ตัว มีงานเทสมหาศาลกว่าเว็บหลายเท่า</b> เพราะต้องเทสบนมือถือหลายรุ่น ทั้ง iOS/Android หลายเวอร์ชัน + API Testing หลังบ้าน ทำงานตาม checklist <b>ไม่ต้องคุยกับคนเยอะ</b></p></div>
+<div class="vibe" style="border-color:rgba(0,172,193,.1)"><h4>✅ ข้อดี vs ❌ ข้อเสีย</h4><p>✅ เข้าสู่ IT ง่ายที่สุด ไม่ต้องเขียนโค้ด ตลาดขาดแคลน รับจบใหม่เยอะที่สุด กดดันน้อย Remote ได้<br>❌ เงินเดือนเริ่มต้นต่ำกว่าสาย Dev แต่ถ้าต่อยอดเป็น Automation Tester เงินเดือนขึ้นเร็วมาก เป็น<b>จุดเริ่มต้นที่ดีก่อนย้ายไปสาย Dev หรือ DevOps</b></p></div>
+<div class="highlight-box" style="border-color:rgba(0,172,193,.12);background:linear-gradient(135deg,rgba(0,172,193,.04),rgba(255,213,79,.03))"><h4 style="color:#00acc1">💡 ทำไม Tester ถึงน่าสนใจสำหรับเด็กจบใหม่?</h4><p>สาย Tester คือ <b>"ประตูเข้าสู่วงการ IT ที่เปิดกว้างที่สุด"</b> ไม่ต้องเขียนโค้ดเก่ง ใช้แค่ Excel + SQL + ความละเอียด เมื่อมีประสบการณ์ 1-2 ปี สามารถต่อยอดไป Automation Tester (เงินเดือน 40-60K+) หรือย้ายไปสาย Dev ได้ง่ายเพราะเข้าใจระบบแล้ว</p></div>
+<h4 style="font-size:.75rem;font-weight:700;color:#00acc1;margin:.6rem 0 .4rem">📚 เส้นทางเรียน</h4>
+<div class="cs"><div class="cs-n">1</div><div><div class="cs-t">BorntoDev — Software Tester เบื้องต้น (YouTube)</div><div class="cs-m"><span>🆓 ฟรี</span><span>🇹🇭 ไทย</span><span>🔍 เริ่มจากศูนย์</span></div><a href="https://www.youtube.com/@BorntoDev" target="_blank">ดูบน YouTube →</a></div></div>
+<div class="cs"><div class="cs-n">2</div><div><div class="cs-t">FutureSkill — QA & Software Tester Series</div><div class="cs-m"><span>💰 1,745฿ (หาร 2 คน)</span><span>🇹🇭 ไทย</span><span>📜 ได้เซอร์</span></div><a href="https://page.futureskill.co/qa" target="_blank">ดูรายละเอียด →</a></div></div>
+<div class="cs"><div class="cs-n">3</div><div><div class="cs-t">Skooldio — Intro to Software Testing</div><div class="cs-m"><span>💰 เสียเงิน</span><span>🇹🇭 ไทย</span><span>🏆 สอนครบวงจร</span></div><a href="https://www.skooldio.com/courses/introduction-to-software-testing" target="_blank">ดูรายละเอียด →</a></div></div>
+<div class="cs"><div class="cs-n">4</div><div><div class="cs-t">SkillLane — Software Testing by P'Beam 💰</div><div class="cs-m"><span>💰 เสียเงิน</span><span>🇹🇭 ไทย</span><span>💼 เน้นหางานจริง</span></div><a href="https://www.skilllane.com/instructors/stpbdigital_skl" target="_blank">ดูรายละเอียด →</a></div></div>
+</div></div></div>
+
 <!-- PRESSURE COMPARISON -->
 <div class="card rv" style="border-color:rgba(233,30,99,.1)">
 <h3>😰 ความกดดันแต่ละสาย — เรียงจากน้อยไปมาก</h3>
 <ul>
-<li><b>📊 Data — กดดันน้อย ⭐</b> ทำงานกับข้อมูล ไม่มี deadline เร่งด่วน แต่ต้องนำเสนอผลงาน</li>
-<li><b>☁️ Cloud — กดดันน้อย ⭐</b> ทำงานกับ Server เงียบๆ แต่ถ้าระบบล่มต้องแก้เร่งด่วน (ไม่บ่อย)</li>
-<li><b>📱 Mobile — กดดันน้อย-ปานกลาง</b> โฟกัสแค่ฝั่ง Mobile มี deadline แต่ไม่หลายทางพร้อมกัน</li>
-<li><b>🤖 AI — กดดันปานกลาง</b> ต้องทดลอง Model หลายรอบ บางทีผลลัพธ์ไม่ออกตามคาด</li>
-<li><b>🌐 Full Stack — กดดันปานกลาง-สูง</b> ดูแลทั้ง Front+Back มีหลายส่วนที่ต้องจัดการพร้อมกัน</li>
+<li><b>🔍 Tester — กดดันน้อยมาก ⭐</b> ทำตาม checklist ไม่ต้องสร้างระบบเอง</li>
+<li><b>📊 Data — กดดันน้อย ⭐</b> งาน Deep Work จดจ่อกับข้อมูล มีโครงสร้างชัด</li>
+<li><b>☁️ Cloud — กดดันน้อย ⭐</b> เวลาปกติเบามาก (ผู้เฝ้าระวัง) แต่ระบบล่มต้องแก้เร่ง</li>
+<li><b>📱 Mobile — กดดันน้อย-ปานกลาง</b> โฟกัสแค่ฝั่ง Mobile ไม่หลายทาง</li>
+<li><b>🤖 AI — กดดันปานกลาง</b> ทดลอง Model หลายรอบ บางทีผลไม่ออกตามคาด</li>
+<li><b>🌐 Full Stack — กดดันปานกลาง-สูง</b> ดูแลทั้ง Front+Back หลายส่วนพร้อมกัน</li>
 </ul>
-<p style="margin-top:.5rem;font-size:.75rem;color:var(--txt3)">💡 สายที่เหมาะกับคนที่ไม่ชอบความกดดัน: <b>Data, Cloud, Mobile</b></p>
+<p style="margin-top:.5rem;font-size:.72rem;color:var(--txt3)">💡 สายที่เหมาะกับคนไม่ชอบความกดดัน: <b>Tester, Data, Cloud, Mobile</b></p>
 </div>
 
 <!-- ROADMAP -->
@@ -729,12 +841,13 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <b>🌱 เดือนที่ 1-2: เรียน Data + AI พื้นฐาน ไปพร้อมกัน</b><br>
 Python, SQL, การวิเคราะห์ข้อมูล <b>เป็นพื้นฐานที่ใช้ได้กับทุกสาย</b> เหมือนฝึกพื้นฐานก่อนเลือก Class — คอร์สที่แนะนำสอน AI/ML รวมอยู่แล้ว<br><br>
 <b>🔀 เดือนที่ 3+: เลือกสายที่ชอบ</b><br>
+▸ ยังไม่มั่นใจ? → เริ่มจาก <b>Tester (Scout)</b> เข้าวงการง่ายสุด แล้วค่อยย้ายสาย<br>
 ▸ ชอบ <b>แก้ปัญหาเงียบๆ</b> → ไป <b>Cloud (Mage)</b><br>
 ▸ ชอบ <b>สร้างของใหม่ ทดลอง AI</b> → ไป <b>AI ลึกขึ้น (Assassin)</b><br>
 ▸ ชอบ <b>สร้างเว็บ เห็นผลทันที</b> → ไป <b>Full Stack (Ranger)</b><br>
 ▸ ชอบ <b>สร้างแอปมือถือ</b> → ไป <b>Mobile Dev (Summoner)</b><br>
-▸ ชอบ <b>วิเคราะห์ตัวเลข</b> → ไป <b>Data ลึกขึ้น (Knight)</b><br><br>
-<b>💡 อนาคต:</b> เมื่อทำงาน 2-3 ปีแล้ว สามารถต่อยอดไป <b>DevOps</b> หรือ <b>Security</b> ได้อีก<br><br>
+▸ ชอบ <b>จัดระเบียบข้อมูล</b> → ไป <b>Data ลึกขึ้น (Knight)</b><br><br>
+<b>💡 อนาคต (ทำงาน 2-3 ปี):</b> ต่อยอดไป <b>DevOps, Security, SOC Analyst</b> (เฝ้าระวังภัยไซเบอร์ ทำงานเป็นกะ) หรือ <b>RPA Developer</b> (สร้างหุ่นยนต์ทำงานแทนคน เขียนโปรแกรมแบบลากวาง) ได้อีก<br><br>
 <b>เปลี่ยนได้เสมอ ไม่ต้องกลัวเลือกผิด</b>
 </p></div>
 </div>
@@ -819,6 +932,50 @@ function showPanel(id){document.querySelectorAll('.main-panel').forEach(p=>p.cla
 function toggleAcc(el){el.classList.toggle('open');if(el.classList.contains('open'))animBars(el)}
 function initReveals(c){const els=(c||document).querySelectorAll('.rv');const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.04,rootMargin:'0px 0px -15px 0px'});els.forEach(el=>{el.classList.remove('vis');obs.observe(el)})}
 function animBars(c){const bars=(c||document).querySelectorAll('.rpg-f[data-w]');bars.forEach((b,i)=>{const w=b.dataset.w;b.style.width='0%';setTimeout(()=>{b.style.width=w+'%'},100+i*60)})}
+// Scroll hints - hide after first interaction
+function hideOnScroll(scrollEl, wrapEl, className){
+  if(!scrollEl||!wrapEl)return;
+  scrollEl.addEventListener('scroll',function h(){
+    wrapEl.classList.add(className);
+    scrollEl.removeEventListener('scroll',h);
+  });
+  // Also listen touch move as fallback
+  scrollEl.addEventListener('touchmove',function h(){
+    wrapEl.classList.add(className);
+    scrollEl.removeEventListener('touchmove',h);
+  });
+}
+// Table
+hideOnScroll(document.getElementById('scrollInner'),document.getElementById('tableWrap'),'scrolled');
+// Also listen on table itself (in case table scrolls instead of wrapper)
+hideOnScroll(document.getElementById('sortTable'),document.getElementById('tableWrap'),'scrolled');
+// Tabs
+hideOnScroll(document.getElementById('mainTabs'),document.getElementById('tabsWrap'),'scrolled-tabs');
+// Sort table
+let sortDir={};
+function sortT(col){
+  const table=document.getElementById('sortTable');
+  if(!table)return;
+  const tbody=table.querySelector('tbody');
+  const rows=Array.from(tbody.querySelectorAll('tr'));
+  const ths=table.querySelectorAll('th');
+  // Toggle direction
+  sortDir[col]=sortDir[col]==='asc'?'desc':'asc';
+  const dir=sortDir[col];
+  // Reset all arrows
+  ths.forEach(th=>{th.classList.remove('sort-asc','sort-desc');const ar=th.querySelector('.sort-arrow');if(ar)ar.textContent='⇅'});
+  // Set active arrow
+  ths[col].classList.add(dir==='asc'?'sort-asc':'sort-desc');
+  const ar=ths[col].querySelector('.sort-arrow');
+  if(ar)ar.textContent='';
+  // Sort by data-sort attribute
+  rows.sort((a,b)=>{
+    const av=parseInt(a.dataset.sort.split(',')[col])||0;
+    const bv=parseInt(b.dataset.sort.split(',')[col])||0;
+    return dir==='asc'?av-bv:bv-av;
+  });
+  rows.forEach(r=>tbody.appendChild(r));
+}
 initReveals();animBars();
 </script>
 </body>
